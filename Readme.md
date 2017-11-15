@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Василий Сушко](https://up.htmlacademy.ru/javascript/11/user/465123).
-* Наставник: `Неизвестно`.
+* Наставник: [Мартин Шульц](https://up.htmlacademy.ru/javascript/11/user/201567).
 
 ---
 
