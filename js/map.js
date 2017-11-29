@@ -63,7 +63,7 @@ var getUserAvatarAddresses = function (amountOfAdvertisements) {
   var randomImages = [];
 
   while (randomImages.length < amountOfAdvertisements) {
-    var randomNumber = Math.floor(Math.random() * amountOfAdvertisements + 1) + 1;
+    var randomNumber = Math.floor(Math.random() * amountOfAdvertisements) + 1;
     var path = getUserAvatarPath(randomNumber);
 
     if (randomImages.indexOf(path) > -1) {
