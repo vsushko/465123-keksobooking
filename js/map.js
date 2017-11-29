@@ -147,6 +147,40 @@ var advertisements = generateSimilarAdvertisements(AMOUNT_OF_ADVERTISEMENTS);
 // покажем блок .map
 document.querySelector('.map').classList.remove('map--faded');
 
+// map__pin
+var markButton = document.querySelector('.map__pin');
+
+/**
+ * Возвращает склонированную ноду кнопки с меткой
+ * @param {Object} advertisement
+ * @returns {Object} нода
+ */
+var renderAdvertisementMark = function (advertisement) {
+  var buttonElement = markButton.cloneNode(true);
+
+  buttonElement.setAttribute('style', 'left: ' + advertisement.location.x + 'px; top: '
+    + advertisement.location.y + 'px;');
+
+  var buttonImgElement = buttonElement.querySelector('img');
+  buttonImgElement.setAttribute('src', advertisement.author);
+
+  return buttonElement;
+}
+
+// генерируем объекты с объявлениями
+var buttonsFragment = document.createDocumentFragment();
+for (var i = 0; i < advertisements.length; i++) {
+  buttonsFragment.appendChild(renderAdvertisementMark(advertisements[i]));
+}
+
+// вставим сгенерированные объявления
+var similarListElement = document.querySelector('.map__pins').appendChild(buttonsFragment);
+
+
+
+
+
+
 // шаблон
 //var similarWizardTemplate = document.querySelector('#similar-wizard-template')
 //.content.querySelector('.map__pins');
