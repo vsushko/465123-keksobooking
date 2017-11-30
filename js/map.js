@@ -82,10 +82,12 @@ var getUserAvatarAddresses = function (amountOfAdvertisements) {
 /**
  * Перемешивает массив случайным образом
  * @param {Array} array массив элементы которого нужно перемешать
- * @return перемешанный массив
+ * @return {Array} перемешанный массив
  */
 var shuffleArray = function (array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length;
+  var temporaryValue;
+  var randomIndex;
 
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -208,9 +210,9 @@ while (fearuresElementsList.firstChild) {
 }
 
 // создаем те которые есть в объявлении
-for (var i = 0; i < firstAdvertisement.offer.features.length; i++) {
+for (var j = 0; j < firstAdvertisement.offer.features.length; j++) {
   var newFeatureElement = document.createElement('li');
-  newFeatureElement.setAttribute('class', 'feature feature--' + firstAdvertisement.offer.features[i]);
+  newFeatureElement.setAttribute('class', 'feature feature--' + firstAdvertisement.offer.features[j]);
   fearuresElementsList.appendChild(newFeatureElement);
 }
 
