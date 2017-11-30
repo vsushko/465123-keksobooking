@@ -46,21 +46,21 @@ var generateSimilarAdvertisements = function (amountOfAdvertisements) {
         'description': '',
         'photos': []
       },
-      "location": {
-        "x": locationX,
-        "y": locationY,
+      'location': {
+        'x': locationX,
+        'y': locationY,
       }
-    })
+    });
   }
 
   return generatedAdvertisements;
-}
+};
 
 /**
- * Геренирует массив с ссылками на аватары  вида img/avatars/user{{xx}}.png,
+ * Гененирует массив с ссылками на аватары  вида img/avatars/user{{xx}}.png,
  * где xx это число от 1 до 8 с ведущим нулем, аватары не повторяются
  * @param {Number} amountOfAdvertisements - кол-во объявлений
- * @returns {Array} массив с ссылками на аватары
+ * @return {Array} массив с ссылками на аватары
  */
 var getUserAvatarAddresses = function (amountOfAdvertisements) {
 
@@ -77,18 +77,17 @@ var getUserAvatarAddresses = function (amountOfAdvertisements) {
   }
 
   return randomImages;
-}
+};
 
 /**
  * Перемешивает массив случайным образом
  * @param {Array} array массив элементы которого нужно перемешать
- * @returns перемешанный массив
+ * @return перемешанный массив
  */
 var shuffleArray = function (array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
-  while (0 !== currentIndex) {
-
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
@@ -98,16 +97,16 @@ var shuffleArray = function (array) {
   }
 
   return array;
-}
+};
 
 /**
  * Возвращает адрес с изображением аватара пользователя
  * @param {Number} number номер пользователя
- * @returns {String} адрес с изображением
+ * @return {String} адрес с изображением
  */
 var getUserAvatarPath = function (number) {
-  return 'img/avatars/user0' + number + '.png'
-}
+  return 'img/avatars/user0' + number + '.png';
+};
 
 /**
  * Возвращает случайное число в указанном интервале
@@ -125,7 +124,7 @@ function getRandomIntInclusive(min, max) {
 /**
  * Возвращает массив строк случайного размера который не больше размера переданного из уникальных значений переданного
  * @param {Array} arrayWithStrings массив строк
- * @returns {Array} массив уникальных строк случайной длины
+ * @return {Array} массив уникальных строк случайной длины
  */
 var getRandomizedArrayWithVariableLength = function (arrayWithStrings) {
 
@@ -143,7 +142,7 @@ var getRandomizedArrayWithVariableLength = function (arrayWithStrings) {
   }
 
   return arrayWithRandomSize;
-}
+};
 
 // сгеренируем объявления
 var advertisements = generateSimilarAdvertisements(AMOUNT_OF_ADVERTISEMENTS);
@@ -157,7 +156,7 @@ var markButton = document.querySelector('.map__pin');
 /**
  * Возвращает склонированную ноду кнопки с меткой
  * @param {Object} advertisement
- * @returns {Object} нода
+ * @return {Object} нода
  */
 var renderAdvertisementMark = function (advertisement) {
   var buttonElement = markButton.cloneNode(true);
@@ -169,7 +168,7 @@ var renderAdvertisementMark = function (advertisement) {
   buttonImgElement.setAttribute('src', advertisement.author);
 
   return buttonElement;
-}
+};
 
 // генерируем объекты с объявлениями
 var buttonsFragment = document.createDocumentFragment();
@@ -210,7 +209,7 @@ while (fearuresElementsList.firstChild) {
 
 // создаем те которые есть в объявлении
 for (var i = 0; i < firstAdvertisement.offer.features.length; i++) {
-  var newFeatureElement = document.createElement("li");
+  var newFeatureElement = document.createElement('li');
   newFeatureElement.setAttribute('class', 'feature feature--' + firstAdvertisement.offer.features[i]);
   fearuresElementsList.appendChild(newFeatureElement);
 }
