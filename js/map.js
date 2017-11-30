@@ -3,6 +3,9 @@
 
 var AMOUNT_OF_ADVERTISEMENTS = 8;
 
+var MAP_PIN_INDENT_X = 20;
+var MAP_PIN_INDENT_Y = 44;
+
 var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец',
   'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик',
   'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -159,8 +162,8 @@ var markButton = document.querySelector('.map__pin');
 var renderAdvertisementMark = function (advertisement) {
   var buttonElement = markButton.cloneNode(true);
 
-  buttonElement.setAttribute('style', 'left: ' + advertisement.location.x + 'px; top: '
-    + advertisement.location.y + 'px;');
+  buttonElement.setAttribute('style', 'left: ' + (advertisement.location.x + MAP_PIN_INDENT_X) + 'px; top: '
+    + (advertisement.location.y + MAP_PIN_INDENT_Y) + 'px;');
 
   var buttonImgElement = buttonElement.querySelector('img');
   buttonImgElement.setAttribute('src', advertisement.author);
@@ -174,35 +177,48 @@ for (var i = 0; i < advertisements.length; i++) {
   buttonsFragment.appendChild(renderAdvertisementMark(advertisements[i]));
 }
 
-// вставим сгенерированные объявления
-var similarListElement = document.querySelector('.map__pins').appendChild(buttonsFragment);
+// элемент куда будем вставлять объявления
+var similarListElement = document.querySelector('.map__pins');
+
+// удаляем предзаполненные метки
+while (similarListElement.firstChild) {
+  similarListElement.removeChild(similarListElement.firstChild);
+}
+
+// вставляем сгенерированные
+similarListElement.appendChild(buttonsFragment);
 
 // создадим DOM-элемент объявления на основе первого объявления
-var advertisementArticle = document.querySelector('template');//.content.querySelector('.map__card');
+var advertisementArticle = document.querySelector('template').content.querySelector('.map__card');
 
 var firstAdvertisement = advertisements[0];
-console.log(advertisementArticle);
-console.log(firstAdvertisement);
 
 // заполним поля данными из объявления
 advertisementArticle.querySelector('.popup__title').textContent = firstAdvertisement.offer.title;
-//advertisementArticle.querySelector('.popup__address').textContent = firstAdvertisement.offer.address;
-debugger
-/*advertisementArticle.querySelector('.popup__price').textContent = firstAdvertisement.price + '&#x20bd;/ночь';
-advertisementArticle.querySelector('h4').textContent = HOUSE_TYPES_MAP[firstAdvertisement.type];
-advertisementArticle.querySelector('p')[0].textContent = firstAdvertisement.rooms + ' для ' + firstAdvertisement.guests + ' гостей';
-advertisementArticle.querySelector('p')[1].textContent = 'Заезд после ' + firstAdvertisement.checkin + ', выезд до ' + firstAdvertisement.checkout;
-*/
+advertisementArticle.querySelector('.popup__address small').textContent = firstAdvertisement.offer.address;
+advertisementArticle.querySelector('.popup__price').textContent = firstAdvertisement.offer.price + '&#x20bd;/ночь';
+advertisementArticle.querySelector('.popup__house_type').textContent = HOUSE_TYPES_MAP[firstAdvertisement.offer.type];
+advertisementArticle.querySelector('.popup__rooms_guests').textContent = firstAdvertisement.offer.rooms + ' для ' + firstAdvertisement.offer.guests + ' гостей';
+advertisementArticle.querySelector('.popup__checkin_checkout').textContent = 'Заезд после ' + firstAdvertisement.offer.checkin + ', выезд до ' + firstAdvertisement.offer.checkout;
 
+var fearuresElementsList = advertisementArticle.querySelector('.popup__features');
 
+// удаляем предзаполненные фичи из шаблона
+while (fearuresElementsList.firstChild) {
+  fearuresElementsList.removeChild(fearuresElementsList.firstChild);
+}
 
+// создаем те которые есть в объявлении
+for (var i = 0; i < firstAdvertisement.offer.features.length; i++) {
+  var newFeatureElement = document.createElement("li");
+  newFeatureElement.setAttribute('class', 'feature feature--' + firstAdvertisement.offer.features[i]);
+  fearuresElementsList.appendChild(newFeatureElement);
+}
 
+advertisementArticle.querySelector('.popup__description').textContent = firstAdvertisement.offer.description;
+advertisementArticle.querySelector('.popup__avatar').setAttribute('src', firstAdvertisement.author);
 
+// вставляем перед блоком .map__filters-container объявление
+var mapFiltersContainer = document.querySelector('.map__filters-container');
+mapFiltersContainer.parentNode.insertBefore(advertisementArticle, mapFiltersContainer);
 
-
-// var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-// .content.querySelector('.setup-similar-item');
-
-// шаблон
-//var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-//.content.querySelector('.map__pins');
