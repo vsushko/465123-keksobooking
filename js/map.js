@@ -13,12 +13,12 @@ var HOUSE_TYPES = ['flat', 'house', 'bungalo'];
 var CHECKIN_TIMES = ['12:00', '13:00', '14:00'];
 var CHECKOUT_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var HOUSE_TYPES_MAP = { 'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало' }
+var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
 
 /**
  * Генерирует уникальные объявления
  * @param {Number} amountOfAdvertisements  количество объявлений
- * @returns {Array} массив с уникальными объявлениями
+ * @return {Array} массив с уникальными объявлениями
  */
 var generateSimilarAdvertisements = function (amountOfAdvertisements) {
   var generatedAdvertisements = [];
@@ -32,19 +32,19 @@ var generateSimilarAdvertisements = function (amountOfAdvertisements) {
     var locationY = getRandomIntInclusive(99, 501);
 
     generatedAdvertisements.push({
-      "author": avatars[i],
-      "offer": {
-        "title": titles[i],
-        "address": locationX + ', ' + locationY,
-        "price": getRandomIntInclusive(999, 1000001),
-        "type": HOUSE_TYPES[getRandomIntInclusive(0, HOUSE_TYPES.length - 1)],
-        "rooms": getRandomIntInclusive(0, 6),
-        "guests": getRandomIntInclusive(0, 6),
-        "checkin": CHECKIN_TIMES[getRandomIntInclusive(0, CHECKIN_TIMES.length - 1)],
-        "checkout": CHECKOUT_TIMES[getRandomIntInclusive(0, CHECKOUT_TIMES.length - 1)],
-        "features": getRandomizedArrayWithVariableLength(FEATURES),
-        "description": '',
-        "photos": []
+      'author': avatars[i],
+      'offer': {
+        'title': titles[i],
+        'address': locationX + ', ' + locationY,
+        'price': getRandomIntInclusive(999, 1000001),
+        'type': HOUSE_TYPES[getRandomIntInclusive(0, HOUSE_TYPES.length - 1)],
+        'rooms': getRandomIntInclusive(0, 6),
+        'guests': getRandomIntInclusive(0, 6),
+        'checkin': CHECKIN_TIMES[getRandomIntInclusive(0, CHECKIN_TIMES.length - 1)],
+        'checkout': CHECKOUT_TIMES[getRandomIntInclusive(0, CHECKOUT_TIMES.length - 1)],
+        'features': getRandomizedArrayWithVariableLength(FEATURES),
+        'description': '',
+        'photos': []
       },
       "location": {
         "x": locationX,
