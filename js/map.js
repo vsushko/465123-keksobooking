@@ -10,6 +10,7 @@ var HOUSE_TYPES = ['flat', 'house', 'bungalo'];
 var CHECKIN_TIMES = ['12:00', '13:00', '14:00'];
 var CHECKOUT_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var HOUSE_TYPES_MAP = { 'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало' }
 
 /**
  * Генерирует уникальные объявления
@@ -176,10 +177,31 @@ for (var i = 0; i < advertisements.length; i++) {
 // вставим сгенерированные объявления
 var similarListElement = document.querySelector('.map__pins').appendChild(buttonsFragment);
 
+// создадим DOM-элемент объявления на основе первого объявления
+var advertisementArticle = document.querySelector('template');//.content.querySelector('.map__card');
+
+var firstAdvertisement = advertisements[0];
+console.log(advertisementArticle);
+console.log(firstAdvertisement);
+
+// заполним поля данными из объявления
+advertisementArticle.querySelector('.popup__title').textContent = firstAdvertisement.offer.title;
+//advertisementArticle.querySelector('.popup__address').textContent = firstAdvertisement.offer.address;
+debugger
+/*advertisementArticle.querySelector('.popup__price').textContent = firstAdvertisement.price + '&#x20bd;/ночь';
+advertisementArticle.querySelector('h4').textContent = HOUSE_TYPES_MAP[firstAdvertisement.type];
+advertisementArticle.querySelector('p')[0].textContent = firstAdvertisement.rooms + ' для ' + firstAdvertisement.guests + ' гостей';
+advertisementArticle.querySelector('p')[1].textContent = 'Заезд после ' + firstAdvertisement.checkin + ', выезд до ' + firstAdvertisement.checkout;
+*/
 
 
 
 
+
+
+
+// var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+// .content.querySelector('.setup-similar-item');
 
 // шаблон
 //var similarWizardTemplate = document.querySelector('#similar-wizard-template')
