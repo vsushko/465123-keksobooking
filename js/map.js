@@ -184,7 +184,7 @@ for (var i = 0; i < advertisements.length; i++) {
 var createAdvertisementPopup = function (advertisement) {
 
   // создадим DOM-элемент объявления на основе первого объявления
-  var advertisementPopup = document.querySelector('template').content.querySelector('.map__card');
+  var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
 
   // заполним поля данными из объявления
   advertisementPopup.querySelector('.popup__title').textContent = advertisement.offer.title;
