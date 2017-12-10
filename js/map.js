@@ -179,6 +179,9 @@ for (var i = 0; i < advertisements.length; i++) {
   buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
 }
 
+// создадим DOM-элемент объявления на основе первого объявления
+var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
+
 /**
  * Заполняет popup на основе данных переданного объявления
  * @param {Object} advertisement объявление
@@ -187,10 +190,6 @@ for (var i = 0; i < advertisements.length; i++) {
 var createAdvertisementPopup = function (advertisement) {
 
   if (advertisement) {
-debugger
-    // создадим DOM-элемент объявления на основе первого объявления
-    var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
-
     // заполним поля данными из объявления
     advertisementPopup.querySelector('.popup__title').textContent = advertisement.offer.title;
     advertisementPopup.querySelector('.popup__address small').textContent = advertisement.offer.address;
@@ -270,21 +269,6 @@ mapPinButton.addEventListener('mouseup', function () {
       openPopup(mapPinsContainer);
     }
   });
-
-  // кнопка попапа закрыть
-  var closePopupButtonHandler = document.querySelector('.popup__close');
-
-  if (closePopupButtonHandler) {
-    closePopupButtonHandler.addEventListener('click', function () {
-      closePopup();
-    });
-
-    closePopupButtonHandler.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        closePopup();
-      }
-    });
-  }
 });
 
 var onPopupEscPress = function (event) {
@@ -334,13 +318,29 @@ var openPopup = function (mapPinsContainer) {
   event.target.parentNode.classList.add('map__pin--active');
 
   document.addEventListener('keydown', onPopupEscPress);
+
+  if (advertisementPopup) {
+    advertisementPopup.addEventListener('click', function () {
+      closePopup(advertisementPopup);
+    });
+
+    advertisementPopup.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        closePopup(advertisementPopup);
+      }
+    });
+  }
 };
 
-var closePopup = function () {
-  // попап для удаления
-  var advertisementPopup = document.querySelector('template').content.querySelector('.map__card');
-  // удаляем ноду
-  advertisementPopup.parentNode.removeChild(advertisementPopup);
-  // удаляем слушатель
-  document.removeEventListener('keydown', onPopupEscPress);
+var closePopup = function (advertisementPopup) {
+  //debugger
+  if (advertisementPopup) {
+    // удаляем ноду, если клик
+    advertisementPopup.remove();
+    document.removeEventListener('keydown', onPopupEscPress);
+  } else {
+    // var popup = document.querySelector('template').content.querySelector('.map__card');
+    // popup.parentNode.removeChild(popup);
+    advertisementPopup.remove();
+  }
 };
