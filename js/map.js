@@ -208,7 +208,7 @@ var createAdvertisementPopup = function (advertisement) {
     }
 
     // создаем те которые есть в объявлении
-    for (var i = 0; i < advertisement.offer.features.length; i++) {
+    for (i = 0; i < advertisement.offer.features.length; i++) {
       var newFeatureElement = document.createElement('li');
       newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[i]);
       fearuresElementsList.appendChild(newFeatureElement);
@@ -292,7 +292,7 @@ var openPopup = function (mapPinsContainer) {
       var advertisement;
 
       // найдем объявление
-      for (var i = 0; i < advertisements.length; i++) {
+      for (i = 0; i < advertisements.length; i++) {
         if (pinImg.src.indexOf(advertisements[i].author) !== -1) {
           advertisement = advertisements[i];
         }
@@ -300,7 +300,7 @@ var openPopup = function (mapPinsContainer) {
 
       if (advertisement) {
         // создадим попап на основе переданного объявления
-        var currentAdvertisementPopup = createAdvertisementPopup(advertisement);
+        currentAdvertisementPopup = createAdvertisementPopup(advertisement);
         // достанем блок .map__filters-container перед которым будем вставлять объявление
         var mapFiltersContainer = document.querySelector('.map__filters-container');
         // вставим объявление
@@ -316,7 +316,7 @@ var openPopup = function (mapPinsContainer) {
     if (pinsClasses.contains('map__pin--active')) {
       pinsClasses.remove('map__pin--active')
     }
-  }
+  };
 
   // добавим класс map__pin--active к кнопке
   event.target.parentNode.classList.add('map__pin--active');
