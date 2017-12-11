@@ -314,9 +314,9 @@ var openPopup = function (mapPinsContainer) {
     var pinsClasses = mapPinsContainer.children[i].classList;
 
     if (pinsClasses.contains('map__pin--active')) {
-      pinsClasses.remove('map__pin--active')
+      pinsClasses.remove('map__pin--active');
     }
-  };
+  }
 
   // добавим класс map__pin--active к кнопке
   event.target.parentNode.classList.add('map__pin--active');
