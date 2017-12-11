@@ -320,7 +320,8 @@ var openPopup = function (mapPinsContainer) {
   document.addEventListener('keydown', onPopupEscPress);
 
   if (advertisementPopup) {
-    advertisementPopup.addEventListener('click', function () {
+    var closePopupButton = document.querySelector('.popup__close');
+    closePopupButton.addEventListener('click', function () {
       closePopup(advertisementPopup);
     });
 
@@ -333,14 +334,16 @@ var openPopup = function (mapPinsContainer) {
 };
 
 var closePopup = function (advertisementPopup) {
-  //debugger
+
   if (advertisementPopup) {
     // удаляем ноду, если клик
     advertisementPopup.remove();
     document.removeEventListener('keydown', onPopupEscPress);
   } else {
-    // var popup = document.querySelector('template').content.querySelector('.map__card');
-    // popup.parentNode.removeChild(popup);
-    advertisementPopup.remove();
+    // обрабатываем esc
+    var mapCard = document.querySelector('.map__card');
+    if (mapCard) {
+      mapCard.remove();
+    }
   }
 };
