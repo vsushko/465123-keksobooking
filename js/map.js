@@ -18,6 +18,9 @@ var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo':
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
+// для циклов
+var i = 0;
+
 /**
  * Генерирует уникальные объявления
  * @param {Number} amountOfAdvertisements  количество объявлений
@@ -29,7 +32,7 @@ var generateSimilarAdvertisements = function (amountOfAdvertisements) {
   var avatars = getUserAvatarAddresses(AMOUNT_OF_ADVERTISEMENTS);
   var titles = shuffleArray(TITLES);
 
-  for (let i = 0; i < amountOfAdvertisements; i++) {
+  for (i = 0; i < amountOfAdvertisements; i++) {
 
     var locationX = getRandomIntInclusive(299, 901);
     var locationY = getRandomIntInclusive(99, 501);
@@ -174,7 +177,7 @@ var renderAdvertisementPin = function (advertisement) {
 
 // генерируем объекты с объявлениями
 var buttonsFragment = document.createDocumentFragment();
-for (let i = 0; i < advertisements.length; i++) {
+for (i = 0; i < advertisements.length; i++) {
   buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
 }
 
@@ -205,9 +208,9 @@ var createAdvertisementPopup = function (advertisement) {
     }
 
     // создаем те которые есть в объявлении
-    for (var j = 0; j < advertisement.offer.features.length; j++) {
+    for (var i = 0; i < advertisement.offer.features.length; i++) {
       var newFeatureElement = document.createElement('li');
-      newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[j]);
+      newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[i]);
       fearuresElementsList.appendChild(newFeatureElement);
     }
 
@@ -227,7 +230,7 @@ var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldse
  * @param {Boolean} deactivated флаг неактивности
  */
 var setFieldSetInaccessibility = function (fieldSetToDeactivate, deactivated) {
-  for (let i = 0; i < fieldSetToDeactivate.length; i++) {
+  for (i = 0; i < fieldSetToDeactivate.length; i++) {
     fieldSetToDeactivate[i].disabled = deactivated;
   }
 };
@@ -289,9 +292,9 @@ var openPopup = function (mapPinsContainer) {
       var advertisement;
 
       // найдем объявление
-      for (var n = 0; n < advertisements.length; n++) {
-        if (pinImg.src.indexOf(advertisements[n].author) !== -1) {
-          advertisement = advertisements[n];
+      for (var i = 0; i < advertisements.length; i++) {
+        if (pinImg.src.indexOf(advertisements[i].author) !== -1) {
+          advertisement = advertisements[i];
         }
       }
 
@@ -307,7 +310,7 @@ var openPopup = function (mapPinsContainer) {
   }
 
   // удалим map__pin--active у он был у кнопки
-  for (let i = 0; i < mapPinsContainer.children.length; i++) {
+  for (i = 0; i < mapPinsContainer.children.length; i++) {
     var pinsClasses = mapPinsContainer.children[i].classList;
 
     if (pinsClasses.contains('map__pin--active')) {
