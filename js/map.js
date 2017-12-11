@@ -13,7 +13,7 @@ var HOUSE_TYPES = ['flat', 'house', 'bungalo'];
 var CHECKIN_TIMES = ['12:00', '13:00', '14:00'];
 var CHECKOUT_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var HOUSE_TYPES_MAP = { 'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало' };
+var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
 
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
@@ -29,7 +29,7 @@ var generateSimilarAdvertisements = function (amountOfAdvertisements) {
   var avatars = getUserAvatarAddresses(AMOUNT_OF_ADVERTISEMENTS);
   var titles = shuffleArray(TITLES);
 
-  for (var i = 0; i < amountOfAdvertisements; i++) {
+  for (let i = 0; i < amountOfAdvertisements; i++) {
 
     var locationX = getRandomIntInclusive(299, 901);
     var locationY = getRandomIntInclusive(99, 501);
@@ -174,8 +174,7 @@ var renderAdvertisementPin = function (advertisement) {
 
 // генерируем объекты с объявлениями
 var buttonsFragment = document.createDocumentFragment();
-for (var i = 0; i < advertisements.length; i++) {
-
+for (let i = 0; i < advertisements.length; i++) {
   buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
 }
 
@@ -217,21 +216,21 @@ var createAdvertisementPopup = function (advertisement) {
   }
 
   return advertisementPopup;
-}
+};
 
 // все поля формы изначально должны быть недоступны
 var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldset');
 
 /**
  * Делает поля активными в зависимости от переданного флага
- * @param {Array} fieldSet список полей ввода
+ * @param {Array} fieldSetToDeactivate список полей ввода
  * @param {Boolean} deactivated флаг неактивности
  */
-var setFieldSetInaccessibility = function (fieldSet, deactivated) {
-  for (var i = 0; i < fieldSet.length; i++) {
-    fieldSet[i].disabled = deactivated;
+var setFieldSetInaccessibility = function (fieldSetToDeactivate, deactivated) {
+  for (let i = 0; i < fieldSetToDeactivate.length; i++) {
+    fieldSetToDeactivate[i].disabled = deactivated;
   }
-}
+};
 
 // изначально все поля недоступны
 setFieldSetInaccessibility(fieldSet, true);
@@ -279,6 +278,8 @@ var onPopupEscPress = function (event) {
 
 var openPopup = function (mapPinsContainer) {
   var clickedPin = event.target;
+  var currentAdvertisementPopup;
+
 
   if (clickedPin) {
     // либо это клик мышкой по пину, либо нажали ENTER
@@ -296,17 +297,17 @@ var openPopup = function (mapPinsContainer) {
 
       if (advertisement) {
         // создадим попап на основе переданного объявления
-        var advertisementPopup = createAdvertisementPopup(advertisement);
+        var currentAdvertisementPopup = createAdvertisementPopup(advertisement);
         // достанем блок .map__filters-container перед которым будем вставлять объявление
         var mapFiltersContainer = document.querySelector('.map__filters-container');
         // вставим объявление
-        mapFiltersContainer.parentNode.insertBefore(advertisementPopup, mapFiltersContainer);
+        mapFiltersContainer.parentNode.insertBefore(currentAdvertisementPopup, mapFiltersContainer);
       }
     }
   }
 
   // удалим map__pin--active у он был у кнопки
-  for (var i = 0; i < mapPinsContainer.children.length; i++) {
+  for (let i = 0; i < mapPinsContainer.children.length; i++) {
     var pinsClasses = mapPinsContainer.children[i].classList;
 
     if (pinsClasses.contains('map__pin--active')) {
@@ -319,25 +320,25 @@ var openPopup = function (mapPinsContainer) {
 
   document.addEventListener('keydown', onPopupEscPress);
 
-  if (advertisementPopup) {
+  if (currentAdvertisementPopup) {
     var closePopupButton = document.querySelector('.popup__close');
     closePopupButton.addEventListener('click', function () {
-      closePopup(advertisementPopup);
+      closePopup(currentAdvertisementPopup);
     });
 
-    advertisementPopup.addEventListener('keydown', function (evt) {
+    currentAdvertisementPopup.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ENTER_KEYCODE) {
-        closePopup(advertisementPopup);
+        closePopup(currentAdvertisementPopup);
       }
     });
   }
 };
 
-var closePopup = function (advertisementPopup) {
+var closePopup = function (toClosePopup) {
 
-  if (advertisementPopup) {
+  if (toClosePopup) {
     // удаляем ноду, если клик
-    advertisementPopup.remove();
+    toClosePopup.remove();
     document.removeEventListener('keydown', onPopupEscPress);
   } else {
     // обрабатываем esc
