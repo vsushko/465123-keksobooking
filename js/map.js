@@ -175,14 +175,14 @@ var renderAdvertisementPin = function (advertisement) {
 
 /**
  * Генерирует пины по переданному списку объявлений
- * @param {Array} advertisements список объявлений
+ * @param {Array} generatedAdvertisements список объявлений
  * @return {Object} buttonsFragment
  */
-var generateAdvertisement = function (advertisements) {
+var generateAdvertisement = function (generatedAdvertisements) {
   var buttonsFragment = document.createDocumentFragment();
   var i = 0;
-  for (i = 0; i < advertisements.length; i++) {
-    buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
+  for (i = 0; i < generatedAdvertisements.length; i++) {
+    buttonsFragment.appendChild(renderAdvertisementPin(generatedAdvertisements[i]));
   }
 
   return buttonsFragment;
@@ -284,12 +284,20 @@ mapPinButton.addEventListener('mouseup', function () {
   });
 });
 
+/**
+ * Обработчик закрытия попапа
+ * @param {Event} event событие
+ */
 var onPopupEscPress = function (event) {
   if (event.keyCode === ESC_KEYCODE) {
     closePopup();
   }
 };
 
+/**
+ * Обработчик открытия попапа
+ * @param {Object} mapPinsContainer контейнер с кнопками
+ */
 var openPopup = function (mapPinsContainer) {
   var clickedPin = event.target;
   var currentAdvertisementPopup;
@@ -348,6 +356,10 @@ var openPopup = function (mapPinsContainer) {
   }
 };
 
+/**
+ * Удалет попап из DOM
+ * @param {Object} toClosePopup попап для удаления
+ */
 var closePopup = function (toClosePopup) {
 
   if (toClosePopup) {
