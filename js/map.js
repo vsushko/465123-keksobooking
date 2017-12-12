@@ -29,7 +29,7 @@ var i = 0;
 var generateSimilarAdvertisements = function (amountOfAdvertisements) {
   var generatedAdvertisements = [];
 
-  var avatars = getUserAvatarAddresses(AMOUNT_OF_ADVERTISEMENTS);
+  var avatars = getUserAvatarAddresses(amountOfAdvertisements);
   var titles = shuffleArray(TITLES);
 
   for (i = 0; i < amountOfAdvertisements; i++) {
