@@ -175,7 +175,7 @@ var renderAdvertisementPin = function (advertisement) {
 
 /**
  * Генерирует пины по переданному списку объявлений
- * @param {Array} advertisements объявления
+ * @param {Array} advertisements список объявлений
  * @return {Object} buttonsFragment
  */
 var generateAdvertisement = function (advertisements) {
