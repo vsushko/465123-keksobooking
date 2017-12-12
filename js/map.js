@@ -18,9 +18,6 @@ var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo':
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
-// для циклов
-var i = 0;
-
 /**
  * Генерирует уникальные объявления
  * @param {Number} amountOfAdvertisements  количество объявлений
@@ -32,6 +29,7 @@ var generateSimilarAdvertisements = function (amountOfAdvertisements) {
   var avatars = getUserAvatarAddresses(amountOfAdvertisements);
   var titles = shuffleArray(TITLES);
 
+  var i = 0;
   for (i = 0; i < amountOfAdvertisements; i++) {
 
     var locationX = getRandomIntInclusive(299, 901);
@@ -177,6 +175,7 @@ var renderAdvertisementPin = function (advertisement) {
 
 // генерируем объекты с объявлениями
 var buttonsFragment = document.createDocumentFragment();
+var i = 0;
 for (i = 0; i < advertisements.length; i++) {
   buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
 }
@@ -208,6 +207,7 @@ var createAdvertisementPopup = function (advertisement) {
     }
 
     // создаем те которые есть в объявлении
+    var i = 0;
     for (i = 0; i < advertisement.offer.features.length; i++) {
       var newFeatureElement = document.createElement('li');
       newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[i]);
@@ -230,6 +230,7 @@ var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldse
  * @param {Boolean} deactivated флаг неактивности
  */
 var setFieldSetInaccessibility = function (fieldSetToDeactivate, deactivated) {
+  var i = 0;
   for (i = 0; i < fieldSetToDeactivate.length; i++) {
     fieldSetToDeactivate[i].disabled = deactivated;
   }
@@ -282,7 +283,7 @@ var onPopupEscPress = function (event) {
 var openPopup = function (mapPinsContainer) {
   var clickedPin = event.target;
   var currentAdvertisementPopup;
-
+  var i = 0;
 
   if (clickedPin) {
     // либо это клик мышкой по пину, либо нажали ENTER
