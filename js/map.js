@@ -178,7 +178,7 @@ var renderAdvertisementPin = function (advertisement) {
  * @param {Array} advertisements объявления
  * @return {Object} buttonsFragment
  */
-var generateAdvertisement = function(advertisements) {
+var generateAdvertisement = function (advertisements) {
   var buttonsFragment = document.createDocumentFragment();
   var i = 0;
   for (i = 0; i < advertisements.length; i++) {
@@ -186,9 +186,9 @@ var generateAdvertisement = function(advertisements) {
   }
 
   return buttonsFragment;
-}
+};
 
-var buttonsFragment = generateAdvertisement(advertisements);
+var pinButtonsFragment = generateAdvertisement(advertisements);
 
 // создадим DOM-элемент объявления на основе первого объявления
 var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
@@ -265,7 +265,7 @@ mapPinButton.addEventListener('mouseup', function () {
   }
 
   // вставляем сгенерированные
-  mapPinsContainer.appendChild(buttonsFragment);
+  mapPinsContainer.appendChild(pinButtonsFragment);
 
   // делаем форму активной
   document.querySelector('.notice__form').classList.remove('notice__form--disabled');
