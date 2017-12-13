@@ -216,8 +216,7 @@ var createAdvertisementPopup = function (advertisement) {
     }
 
     // создаем те которые есть в объявлении
-    var i = 0;
-    for (i = 0; i < advertisement.offer.features.length; i++) {
+    for (var i = 0; i < advertisement.offer.features.length; i++) {
       var newFeatureElement = document.createElement('li');
       newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[i]);
       fearuresElementsList.appendChild(newFeatureElement);
