@@ -203,7 +203,7 @@ var createAdvertisementPopup = function (advertisement) {
     // заполним поля данными из объявления
     advertisementPopup.querySelector('.popup__title').textContent = advertisement.offer.title;
     advertisementPopup.querySelector('.popup__address small').textContent = advertisement.offer.address;
-    advertisementPopup.querySelector('.popup__price').textContent = advertisement.offer.price + '&#x20bd;/ночь';
+    advertisementPopup.querySelector('.popup__price').textContent = advertisement.offer.price + '\u20bd/ночь';
     advertisementPopup.querySelector('.popup__house_type').textContent = HOUSE_TYPES_MAP[advertisement.offer.type];
     advertisementPopup.querySelector('.popup__rooms_guests').textContent = advertisement.offer.rooms + ' для ' + advertisement.offer.guests + ' гостей';
     advertisementPopup.querySelector('.popup__checkin_checkout').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
