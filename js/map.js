@@ -238,8 +238,7 @@ var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldse
  * @param {Boolean} deactivated флаг неактивности
  */
 var setFieldSetInaccessibility = function (fieldSetToDeactivate, deactivated) {
-  var i = 0;
-  for (i = 0; i < fieldSetToDeactivate.length; i++) {
+  for (var i = 0; i < fieldSetToDeactivate.length; i++) {
     fieldSetToDeactivate[i].disabled = deactivated;
   }
 };
