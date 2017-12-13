@@ -179,8 +179,8 @@ var renderAdvertisementPin = function (advertisement) {
  */
 var generateAdvertisement = function (generatedAdvertisements) {
   var buttonsFragment = document.createDocumentFragment();
-  var i = 0;
-  for (i = 0; i < generatedAdvertisements.length; i++) {
+
+  for (var i = 0; i < generatedAdvertisements.length; i++) {
     buttonsFragment.appendChild(renderAdvertisementPin(generatedAdvertisements[i]));
   }
 
