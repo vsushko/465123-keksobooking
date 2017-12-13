@@ -29,8 +29,7 @@ var generateSimilarAdvertisements = function (amountOfAdvertisements) {
   var avatars = getUserAvatarAddresses(amountOfAdvertisements);
   var titles = shuffleArray(TITLES);
 
-  var i = 0;
-  for (i = 0; i < amountOfAdvertisements; i++) {
+  for (var i = 0; i < amountOfAdvertisements; i++) {
 
     var locationX = getRandomIntInclusive(299, 901);
     var locationY = getRandomIntInclusive(99, 501);
