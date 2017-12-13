@@ -298,7 +298,6 @@ var onPopupEscPress = function (event) {
 var openPopup = function (mapPinsContainer) {
   var clickedPin = event.target;
   var currentAdvertisementPopup;
-  var i = 0;
 
   if (clickedPin) {
     // либо это клик мышкой по пину, либо нажали ENTER
@@ -308,7 +307,7 @@ var openPopup = function (mapPinsContainer) {
       var advertisement;
 
       // найдем объявление
-      for (i = 0; i < advertisements.length; i++) {
+      for (var i = 0; i < advertisements.length; i++) {
         if (pinImg.src.indexOf(advertisements[i].author) !== -1) {
           advertisement = advertisements[i];
         }
@@ -326,13 +325,7 @@ var openPopup = function (mapPinsContainer) {
   }
 
   // удалим map__pin--active у он был у кнопки
-  for (i = 0; i < mapPinsContainer.children.length; i++) {
-    var pinsClasses = mapPinsContainer.children[i].classList;
-
-    if (pinsClasses.contains('map__pin--active')) {
-      pinsClasses.remove('map__pin--active');
-    }
-  }
+  removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
 
   // добавим класс map__pin--active к кнопке
   event.target.parentNode.classList.add('map__pin--active');
@@ -350,6 +343,21 @@ var openPopup = function (mapPinsContainer) {
         closePopup(currentAdvertisementPopup);
       }
     });
+  }
+};
+
+/**
+ * Удаляет у элементов контейнера указанные классы
+ * @param {Array} elementWithClasses контейнер с объектами у которых нужно удалить класс
+ * @param {String} classToRemove имя класса
+ */
+var removeContainerElementsClassesByName = function (elementWithClasses, classToRemove) {
+  for (var i = 0; i < elementWithClasses.length; i++) {
+    var pinsClasses = elementWithClasses[i].classList;
+
+    if (pinsClasses.contains('map__pin--active')) {
+      pinsClasses.remove('map__pin--active');
+    }
   }
 };
 
