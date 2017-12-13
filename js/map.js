@@ -355,8 +355,8 @@ var removeContainerElementsClassesByName = function (elementWithClasses, classTo
   for (var i = 0; i < elementWithClasses.length; i++) {
     var pinsClasses = elementWithClasses[i].classList;
 
-    if (pinsClasses.contains('map__pin--active')) {
-      pinsClasses.remove('map__pin--active');
+    if (pinsClasses.contains(classToRemove)) {
+      pinsClasses.remove(classToRemove);
     }
   }
 };
