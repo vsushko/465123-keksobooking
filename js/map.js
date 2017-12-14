@@ -201,12 +201,12 @@ var createAdvertisementPopup = function (advertisement) {
 
   if (advertisement) {
     // заполним поля данными из объявления
-    advertisementPopup.querySelector('.popup__title').textContent = advertisement.offer.title;
-    advertisementPopup.querySelector('.popup__address small').textContent = advertisement.offer.address;
-    advertisementPopup.querySelector('.popup__price').textContent = advertisement.offer.price + '\u20bd/ночь';
-    advertisementPopup.querySelector('.popup__house_type').textContent = HOUSE_TYPES_MAP[advertisement.offer.type];
-    advertisementPopup.querySelector('.popup__rooms_guests').textContent = advertisement.offer.rooms + ' для ' + advertisement.offer.guests + ' гостей';
-    advertisementPopup.querySelector('.popup__checkin_checkout').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
+    setElementTextContent('.popup__title', advertisement.offer.title);
+    setElementTextContent('.popup__address small', advertisement.offer.address);
+    setElementTextContent('.popup__price', advertisement.offer.price + '\u20bd/ночь');
+    setElementTextContent('.popup__house_type', HOUSE_TYPES_MAP[advertisement.offer.type]);
+    setElementTextContent('.popup__rooms_guests', advertisement.offer.rooms + ' для ' + advertisement.offer.guests + ' гостей');
+    setElementTextContent('.popup__checkin_checkout', 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout);
 
     var fearuresElementsList = advertisementPopup.querySelector('.popup__features');
 
@@ -222,12 +222,21 @@ var createAdvertisementPopup = function (advertisement) {
       fearuresElementsList.appendChild(newFeatureElement);
     }
 
-    advertisementPopup.querySelector('.popup__description').textContent = advertisement.offer.description;
+    setElementTextContent('.popup__description', advertisement.offer.description);
     advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author);
   }
 
   return advertisementPopup;
 };
+
+/**
+ * Устанавливает элементу указанное значение
+ * @param {Object} elementName
+ * @param {Object} elementValue
+ */
+var setElementTextContent = function(element, elementValue) {
+  advertisementPopup.querySelector(element).textContent = elementValue;
+}
 
 // все поля формы изначально должны быть недоступны
 var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldset');
