@@ -231,12 +231,12 @@ var createAdvertisementPopup = function (advertisement) {
 
 /**
  * Устанавливает элементу указанное значение
- * @param {Object} elementName
+ * @param {Object} element
  * @param {Object} elementValue
  */
-var setElementTextContent = function(element, elementValue) {
+var setElementTextContent = function (element, elementValue) {
   advertisementPopup.querySelector(element).textContent = elementValue;
-}
+};
 
 // все поля формы изначально должны быть недоступны
 var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldset');
@@ -400,7 +400,7 @@ timeInSelect.addEventListener('change', onChangeTimeInEvent);
  */
 function onChangeTimeInEvent() {
   timeOut.value = timeInSelect.value;
-};
+}
 
 var apartmentType = document.getElementById('type');
 var pricePerNight = document.getElementById('price');
@@ -426,7 +426,7 @@ function onChangeApartmentTypeEvent() {
     default:
       pricePerNight.min = 1000;
   }
-};
+}
 
 var apartmentRoomsNumber = document.getElementById('room_number');
 var apartmentCapacity = document.getElementById('capacity');
@@ -437,7 +437,7 @@ apartmentRoomsNumber.addEventListener('change', onChangeApartmentRoomsNumber);
  * Связывает кол-во комнат с кол-вом гостей
  */
 function onChangeApartmentRoomsNumber() {
-  switch (parseInt(apartmentRoomsNumber.value)) {
+  switch (parseInt(apartmentRoomsNumber.value, 10)) {
     case 1:
       apartmentCapacity.value = 1;
       break;
@@ -453,4 +453,4 @@ function onChangeApartmentRoomsNumber() {
     default:
       break;
   }
-};
+}
