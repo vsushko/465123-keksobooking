@@ -407,7 +407,7 @@ var pricePerNight = document.getElementById('price');
 apartmentType.addEventListener('change', onChangeApartmentTypeEvent);
 
 /**
- * Связывает «Тип жилья» с минимальной ценой
+ * Связывает Тип жилья с минимальной ценой
  */
 function onChangeApartmentTypeEvent() {
   switch (HOUSE_TYPES_MAP[apartmentType.value]) {
