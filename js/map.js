@@ -390,10 +390,10 @@ var closePopup = function (toClosePopup) {
 };
 
 
-var timeInSelect = document.getElementById("timein");
-var timeOut = document.getElementById("timeout");
+var timeInSelect = document.getElementById('timein');
+var timeOut = document.getElementById('timeout');
 
-timeInSelect.addEventListener("change", onChangeTimeInEvent);
+timeInSelect.addEventListener('change', onChangeTimeInEvent);
 
 /**
  * Связывает «время заезда» и «время выезда»
@@ -402,9 +402,9 @@ function onChangeTimeInEvent() {
   timeOut.value = timeInSelect.value;
 };
 
-var apartmentType = document.getElementById("type");
-var pricePerNight = document.getElementById("price");
-apartmentType.addEventListener("change", onChangeApartmentTypeEvent);
+var apartmentType = document.getElementById('type');
+var pricePerNight = document.getElementById('price');
+apartmentType.addEventListener('change', onChangeApartmentTypeEvent);
 
 /**
  * Связывает «Тип жилья» с минимальной ценой
@@ -428,10 +428,10 @@ function onChangeApartmentTypeEvent() {
   }
 };
 
-var apartmentRoomsNumber = document.getElementById("room_number");
-var apartmentCapacity = document.getElementById("capacity");
+var apartmentRoomsNumber = document.getElementById('room_number');
+var apartmentCapacity = document.getElementById('capacity');
 
-apartmentRoomsNumber.addEventListener("change", onChangeApartmentRoomsNumber);
+apartmentRoomsNumber.addEventListener('change', onChangeApartmentRoomsNumber);
 
 /**
  * Связывает кол-во комнат с кол-вом гостей
