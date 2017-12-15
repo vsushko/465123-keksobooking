@@ -18,8 +18,7 @@
   };
 
   // изначально все поля недоступны
-  setFieldSetInaccessibility(true);
-
+  window.form.setFieldSetInaccessibility(true);
 
   var timeInSelect = document.getElementById('timein');
   var timeOut = document.getElementById('timeout');
@@ -41,7 +40,7 @@
    * Связывает Тип жилья с минимальной ценой
    */
   function onChangeApartmentTypeEvent() {
-    switch (HOUSE_TYPES_MAP[apartmentType.value]) {
+    switch (window.card.HOUSE_TYPES_MAP[apartmentType.value]) {
       case 'Лачуга':
         pricePerNight.min = 0;
         break;

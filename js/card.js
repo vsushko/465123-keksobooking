@@ -2,12 +2,12 @@
 'use strict';
 
 (function () {
-  var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
 
   // создадим DOM-элемент объявления на основе существующего
   var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
 
   window.card = {
+    HOUSE_TYPES_MAP: {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'},
     /**
      * Заполняет popup на основе данных переданного объявления
      * @param {Object} advertisement объявление
@@ -19,7 +19,7 @@
         setElementTextContent('.popup__title', advertisement.offer.title);
         setElementTextContent('.popup__address small', advertisement.offer.address);
         setElementTextContent('.popup__price', advertisement.offer.price + '\u20bd/ночь');
-        setElementTextContent('.popup__house_type', HOUSE_TYPES_MAP[advertisement.offer.type]);
+        setElementTextContent('.popup__house_type', this.HOUSE_TYPES_MAP[advertisement.offer.type]);
         setElementTextContent('.popup__rooms_guests', advertisement.offer.rooms + ' для ' + advertisement.offer.guests + ' гостей');
         setElementTextContent('.popup__checkin_checkout', 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout);
 
@@ -42,7 +42,7 @@
       }
       return advertisementPopup;
     }
-  }
+  };
 
   /**
    * Устанавливает элементу указанное значение
