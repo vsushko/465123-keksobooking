@@ -229,6 +229,8 @@ var createAdvertisementPopup = function (advertisement) {
   return advertisementPopup;
 };
 
+
+
 /**
  * Устанавливает элементу указанное значение
  * @param {Object} element
@@ -264,11 +266,6 @@ mapPinButton.addEventListener('mouseup', function () {
 
   // элемент куда будем вставлять объявления
   var mapPinsContainer = document.querySelector('.map__pins');
-
-  // удаляем предзаполненный элемент
-  while (mapPinsContainer.firstChild) {
-    mapPinsContainer.removeChild(mapPinsContainer.firstChild);
-  }
 
   // вставляем сгенерированные
   mapPinsContainer.appendChild(pinButtonsFragment);
