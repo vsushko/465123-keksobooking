@@ -63,6 +63,16 @@ var openPopup = function (mapPinsContainer) {
     if (pinImg && pinImg.nodeName === 'IMG') {
       var advertisement;
 
+      // удалим map__pin--active у он был у кнопки
+      window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
+
+      var parentNode = event.target.parentNode;
+      // добавим класс map__pin--active к кнопке
+      // обрабатываем только вариант нажатия на изображение
+      if (parentNode.className !== 'map__pins') {
+        parentNode.classList.add('map__pin--active');
+      }
+
       // найдем объявление
       for (var i = 0; i < generatedAdvertisements.length; i++) {
         if (pinImg.src.indexOf(generatedAdvertisements[i].author) !== -1) {
@@ -81,11 +91,7 @@ var openPopup = function (mapPinsContainer) {
     }
   }
 
-  // удалим map__pin--active у он был у кнопки
-  window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
 
-  // добавим класс map__pin--active к кнопке
-  event.target.parentNode.classList.add('map__pin--active');
 
   document.addEventListener('keydown', onPopupEscPress);
 
