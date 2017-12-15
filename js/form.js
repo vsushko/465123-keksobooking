@@ -15,7 +15,7 @@
         fieldSet[i].disabled = deactivated;
       }
     }
-  }
+  };
 
   // изначально все поля недоступны
   setFieldSetInaccessibility(true);

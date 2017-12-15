@@ -1,8 +1,6 @@
 
 'use strict';
 
-var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
-
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 

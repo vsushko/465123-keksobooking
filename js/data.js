@@ -48,7 +48,7 @@
       }
       return generatedAdvertisements;
     }
-  }
+  };
 
   /**
    * Гененирует массив с ссылками на аватары  вида img/avatars/user{{xx}}.png,
