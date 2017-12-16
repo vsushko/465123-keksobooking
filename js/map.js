@@ -91,8 +91,6 @@ var openPopup = function (mapPinsContainer) {
     }
   }
 
-
-
   document.addEventListener('keydown', onPopupEscPress);
 
   if (currentAdvertisementPopup) {
@@ -126,3 +124,57 @@ var closePopup = function (toClosePopup) {
     }
   }
 };
+
+// добавим обработку события перетаскивания
+mapPinButton.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  /**
+   * При каждом движении мыши обновляем смещение относительно первоначальной точки
+   * чтобы диалог смещался на необходимую величину
+   * @param {Event} moveEvt
+   */
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    var newCoordYValue = mapPinButton.offsetTop - shift.y;
+    var newCoordXValue = mapPinButton.offsetLeft - shift.x;
+
+    if (newCoordYValue >= 100 && newCoordYValue <= 500) {
+      mapPinButton.style.top = newCoordYValue + 'px';
+      mapPinButton.style.left = newCoordXValue + 'px';
+
+      var addressField = document.getElementById('address');
+      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + 20, 10) + ', y: ' + parseInt(mapPinButton.style.top + 44);
+    }
+  };
+
+  /**
+   * Обрабатывает опускание кнопки мыши
+   * @param {Event} upEvt
+   */
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
