@@ -2,6 +2,7 @@
 'use strict';
 
 (function () {
+  var AMOUNT_OF_ADVERTISEMENTS = 8;
   var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец',
     'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик',
     'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -13,15 +14,14 @@
   window.data = {
     /**
      * Генерирует уникальные объявления
-     * @param {Number} amountOfAdvertisements  количество объявлений
      * @return {Array} массив с уникальными объявлениями
      */
-    generateSimilarAdvertisements: function (amountOfAdvertisements) {
+    generateSimilarAdvertisements: function () {
       var generatedAdvertisements = [];
-      var avatars = getUserAvatarAddresses(amountOfAdvertisements);
+      var avatars = getUserAvatarAddresses(AMOUNT_OF_ADVERTISEMENTS);
       var titles = window.util.shuffleArray(TITLES);
 
-      for (var i = 0; i < amountOfAdvertisements; i++) {
+      for (var i = 0; i < AMOUNT_OF_ADVERTISEMENTS; i++) {
         var locationX = window.util.getRandomIntInclusive(299, 901);
         var locationY = window.util.getRandomIntInclusive(99, 501);
 

@@ -2,8 +2,6 @@
 'use strict';
 
 (function () {
-  var AMOUNT_OF_ADVERTISEMENTS = 8;
-
   var MAP_PIN_INDENT_X = 20;
   var MAP_PIN_INDENT_Y = 44;
 
@@ -26,7 +24,7 @@
   };
 
   window.pin = {
-    advertisements: window.data.generateSimilarAdvertisements(AMOUNT_OF_ADVERTISEMENTS),
+    advertisements: undefined,
     /**
      * Генерирует пины по переданному списку объявлений
      * @param {Object} pinButton DOM-элемент пина для содания других пинов
