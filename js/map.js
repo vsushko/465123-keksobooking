@@ -14,7 +14,7 @@ var pinButtonsFragment = window.pin.generateAdvertisementPins(pinButton);
 
 var mapPinButton = document.querySelector('.map__pin--main');
 
-mapPinButton.addEventListener('mouseup', function () {
+mapPinButton.addEventListener('click', function () {
 
   // открываем карту
   document.querySelector('.map').classList.remove('map--faded');
