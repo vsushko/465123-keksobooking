@@ -201,12 +201,12 @@ var createAdvertisementPopup = function (advertisement) {
 
   if (advertisement) {
     // заполним поля данными из объявления
-    advertisementPopup.querySelector('.popup__title').textContent = advertisement.offer.title;
-    advertisementPopup.querySelector('.popup__address small').textContent = advertisement.offer.address;
-    advertisementPopup.querySelector('.popup__price').textContent = advertisement.offer.price + '\u20bd/ночь';
-    advertisementPopup.querySelector('.popup__house_type').textContent = HOUSE_TYPES_MAP[advertisement.offer.type];
-    advertisementPopup.querySelector('.popup__rooms_guests').textContent = advertisement.offer.rooms + ' для ' + advertisement.offer.guests + ' гостей';
-    advertisementPopup.querySelector('.popup__checkin_checkout').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
+    setElementTextContent('.popup__title', advertisement.offer.title);
+    setElementTextContent('.popup__address small', advertisement.offer.address);
+    setElementTextContent('.popup__price', advertisement.offer.price + '\u20bd/ночь');
+    setElementTextContent('.popup__house_type', HOUSE_TYPES_MAP[advertisement.offer.type]);
+    setElementTextContent('.popup__rooms_guests', advertisement.offer.rooms + ' для ' + advertisement.offer.guests + ' гостей');
+    setElementTextContent('.popup__checkin_checkout', 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout);
 
     var fearuresElementsList = advertisementPopup.querySelector('.popup__features');
 
@@ -222,11 +222,20 @@ var createAdvertisementPopup = function (advertisement) {
       fearuresElementsList.appendChild(newFeatureElement);
     }
 
-    advertisementPopup.querySelector('.popup__description').textContent = advertisement.offer.description;
+    setElementTextContent('.popup__description', advertisement.offer.description);
     advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author);
   }
 
   return advertisementPopup;
+};
+
+/**
+ * Устанавливает элементу указанное значение
+ * @param {Object} element
+ * @param {Object} elementValue
+ */
+var setElementTextContent = function (element, elementValue) {
+  advertisementPopup.querySelector(element).textContent = elementValue;
 };
 
 // все поля формы изначально должны быть недоступны
@@ -255,11 +264,6 @@ mapPinButton.addEventListener('mouseup', function () {
 
   // элемент куда будем вставлять объявления
   var mapPinsContainer = document.querySelector('.map__pins');
-
-  // удаляем предзаполненный элемент
-  while (mapPinsContainer.firstChild) {
-    mapPinsContainer.removeChild(mapPinsContainer.firstChild);
-  }
 
   // вставляем сгенерированные
   mapPinsContainer.appendChild(pinButtonsFragment);
@@ -379,3 +383,78 @@ var closePopup = function (toClosePopup) {
     }
   }
 };
+
+
+var timeInSelect = document.getElementById('timein');
+var timeOut = document.getElementById('timeout');
+
+timeInSelect.addEventListener('change', onChangeTimeInEvent);
+
+/**
+ * Связывает «время заезда» и «время выезда»
+ */
+function onChangeTimeInEvent() {
+  timeOut.value = timeInSelect.value;
+}
+
+timeOut.addEventListener('change', onChangeTimeOutEvent);
+
+/**
+ * Связывает «время заезда» и «время выезда»
+ */
+function onChangeTimeOutEvent() {
+  timeInSelect.value = timeOut.value;
+}
+
+var apartmentType = document.getElementById('type');
+var pricePerNight = document.getElementById('price');
+apartmentType.addEventListener('change', onChangeApartmentTypeEvent);
+
+/**
+ * Связывает Тип жилья с минимальной ценой
+ */
+function onChangeApartmentTypeEvent() {
+  switch (HOUSE_TYPES_MAP[apartmentType.value]) {
+    case 'Лачуга':
+      pricePerNight.min = 0;
+      break;
+    case 'Квартира':
+      pricePerNight.min = 1000;
+      break;
+    case 'Дом':
+      pricePerNight.min = 1000;
+      break;
+    case 'Дворец':
+      pricePerNight.min = 10000;
+      break;
+    default:
+      pricePerNight.min = 1000;
+  }
+}
+
+var apartmentRoomsNumber = document.getElementById('room_number');
+var apartmentCapacity = document.getElementById('capacity');
+
+apartmentRoomsNumber.addEventListener('change', onChangeApartmentRoomsNumber);
+
+/**
+ * Связывает кол-во комнат с кол-вом гостей
+ */
+function onChangeApartmentRoomsNumber() {
+  switch (parseInt(apartmentRoomsNumber.value, 10)) {
+    case 1:
+      apartmentCapacity.value = 1;
+      break;
+    case 2:
+      apartmentCapacity.value = 2;
+      break;
+    case 3:
+      apartmentCapacity.value = 3;
+      break;
+    case 100:
+      apartmentCapacity.value = 0;
+      break;
+    default:
+      break;
+  }
+}
