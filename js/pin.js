@@ -24,7 +24,6 @@
   };
 
   window.pin = {
-    advertisements: undefined,
     /**
      * Генерирует пины по переданному списку объявлений
      * @param {Object} pinButton DOM-элемент пина для содания других пинов

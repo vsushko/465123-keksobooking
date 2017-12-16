@@ -5,11 +5,11 @@
   window.util = {
     /**
      * Перемешивает массив случайным образом
-     * @param {Array} array массив элементы которого нужно перемешать
+     * @param {Array} arrayWithElements массив элементы которого нужно перемешать
      * @return {Array} перемешанный массив
      */
-    shuffleArray: function (array) {
-      var currentIndex = array.length;
+    shuffleArray: function (arrayWithElements) {
+      var currentIndex = arrayWithElements.length;
       var temporaryValue;
       var randomIndex;
 
@@ -17,11 +17,11 @@
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = arrayWithElements[currentIndex];
+        arrayWithElements[currentIndex] = arrayWithElements[randomIndex];
+        arrayWithElements[randomIndex] = temporaryValue;
       }
-      return array;
+      return arrayWithElements;
     },
     /**
     * Возвращает случайное число в указанном интервале
