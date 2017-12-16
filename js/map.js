@@ -229,8 +229,6 @@ var createAdvertisementPopup = function (advertisement) {
   return advertisementPopup;
 };
 
-
-
 /**
  * Устанавливает элементу указанное значение
  * @param {Object} element
