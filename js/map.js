@@ -160,7 +160,7 @@ mapPinButton.addEventListener('mousedown', function (evt) {
       mapPinButton.style.left = newCoordXValue + 'px';
 
       var addressField = document.getElementById('address');
-      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + 20, 10) + ', y: ' + parseInt(mapPinButton.style.top + 44);
+      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + 20, 10) + ', y: ' + parseInt(mapPinButton.style.top + 44, 10);
     }
   };
 
