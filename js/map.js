@@ -68,6 +68,16 @@ var openPopup = function (mapPinsContainer) {
     if (pinImg && pinImg.nodeName === 'IMG') {
       var advertisement;
 
+      // удалим map__pin--active у он был у кнопки
+      window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
+
+      var parentNode = event.target.parentNode;
+      // добавим класс map__pin--active к кнопке
+      // обрабатываем только вариант нажатия на изображение
+      if (parentNode.className !== 'map__pins') {
+        parentNode.classList.add('map__pin--active');
+      }
+
       // найдем объявление
       for (var i = 0; i < generatedAdvertisements.length; i++) {
         if (pinImg.src.indexOf(generatedAdvertisements[i].author) !== -1) {
@@ -85,12 +95,6 @@ var openPopup = function (mapPinsContainer) {
       }
     }
   }
-
-  // удалим map__pin--active у он был у кнопки
-  window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
-
-  // добавим класс map__pin--active к кнопке
-  event.target.parentNode.classList.add('map__pin--active');
 
   document.addEventListener('keydown', onPopupEscPress);
 
@@ -125,3 +129,57 @@ var closePopup = function (toClosePopup) {
     }
   }
 };
+
+// добавим обработку события перетаскивания
+mapPinButton.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  /**
+   * При каждом движении мыши обновляем смещение относительно первоначальной точки
+   * чтобы диалог смещался на необходимую величину
+   * @param {Event} moveEvt
+   */
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    var newCoordYValue = mapPinButton.offsetTop - shift.y;
+    var newCoordXValue = mapPinButton.offsetLeft - shift.x;
+
+    if (newCoordXValue >= 40 && newCoordXValue <= 1160 && newCoordYValue >= 100 && newCoordYValue <= 500) {
+      mapPinButton.style.top = newCoordYValue + 'px';
+      mapPinButton.style.left = newCoordXValue + 'px';
+
+      var addressField = document.getElementById('address');
+      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + 20, 10) + ', y: ' + parseInt(mapPinButton.style.top + 44, 10);
+    }
+  };
+
+  /**
+   * Обрабатывает опускание кнопки мыши
+   * @param {Event} upEvt
+   */
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
