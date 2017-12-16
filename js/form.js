@@ -20,8 +20,8 @@
   // изначально все поля недоступны
   window.form.setFieldSetInaccessibility(true);
 
-  var timeInSelect = document.getElementById('timein');
-  var timeOutSelect = document.getElementById('timeout');
+  var timeInSelect = document.querySelector('#timein');
+  var timeOutSelect = document.querySelector('#timeout');
 
   timeInSelect.addEventListener('change', onChangeTimeInEvent);
 
@@ -41,8 +41,8 @@
     timeInSelect.value = timeOutSelect.value;
   }
 
-  var apartmentType = document.getElementById('type');
-  var pricePerNight = document.getElementById('price');
+  var apartmentType = document.querySelector('#type');
+  var pricePerNight = document.querySelector('#price');
   apartmentType.addEventListener('change', onChangeApartmentTypeEvent);
 
   /**
@@ -67,8 +67,8 @@
     }
   }
 
-  var apartmentRoomsNumber = document.getElementById('room_number');
-  var apartmentCapacity = document.getElementById('capacity');
+  var apartmentRoomsNumber = document.querySelector('#room_number');
+  var apartmentCapacity = document.querySelector('#capacity');
 
   apartmentRoomsNumber.addEventListener('change', onChangeApartmentRoomsNumber);
 
