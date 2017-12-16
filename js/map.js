@@ -160,7 +160,7 @@ mapPinButton.addEventListener('mousedown', function (evt) {
     var newCoordYValue = mapPinButton.offsetTop - shift.y;
     var newCoordXValue = mapPinButton.offsetLeft - shift.x;
 
-    if (newCoordYValue >= 100 && newCoordYValue <= 500) {
+    if (newCoordXValue >= 40 && newCoordXValue <= 1160 && newCoordYValue >= 100 && newCoordYValue <= 500) {
       mapPinButton.style.top = newCoordYValue + 'px';
       mapPinButton.style.left = newCoordXValue + 'px';
 
