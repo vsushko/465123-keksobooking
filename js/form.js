@@ -21,7 +21,7 @@
   window.form.setFieldSetInaccessibility(true);
 
   var timeInSelect = document.getElementById('timein');
-  var timeOut = document.getElementById('timeout');
+  var timeOutSelect = document.getElementById('timeout');
 
   timeInSelect.addEventListener('change', onChangeTimeInEvent);
 
@@ -29,7 +29,16 @@
    * Связывает «время заезда» и «время выезда»
    */
   function onChangeTimeInEvent() {
-    timeOut.value = timeInSelect.value;
+    timeOutSelect.value = timeInSelect.value;
+  }
+
+  timeOutSelect.addEventListener('change', onChangeTimeOutEvent);
+
+  /**
+   * Связывает «время выезда» и «время заезда»
+   */
+  function onChangeTimeOutEvent() {
+    timeInSelect.value = timeOutSelect.value;
   }
 
   var apartmentType = document.getElementById('type');

@@ -4,8 +4,13 @@
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
-// сгенерируем пины
-var pinButtonsFragment = window.pin.generateAdvertisementPins();
+// найдем DOM-элемент пина
+var pinButton = document.querySelector('.map__pin');
+
+// сгеренируем данные для пинов
+window.pin.advertisements = window.data.generateSimilarAdvertisements();
+// сгенерируем пины на основе существующего
+var pinButtonsFragment = window.pin.generateAdvertisementPins(pinButton);
 
 var mapPinButton = document.querySelector('.map__pin--main');
 
