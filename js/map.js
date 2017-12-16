@@ -399,6 +399,15 @@ function onChangeTimeInEvent() {
   timeOut.value = timeInSelect.value;
 }
 
+timeOut.addEventListener('change', onChangeTimeOutEvent);
+
+/**
+ * Связывает «время заезда» и «время выезда»
+ */
+function onChangeTimeOutEvent() {
+  timeInSelect.value = timeOut.value;
+}
+
 var apartmentType = document.getElementById('type');
 var pricePerNight = document.getElementById('price');
 apartmentType.addEventListener('change', onChangeApartmentTypeEvent);
