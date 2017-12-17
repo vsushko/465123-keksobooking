@@ -3,10 +3,6 @@
 
 (function () {
 
-  var ROOM_NUMBERS = ['1', '2', '3', '100'];
-  var HOUSE_TYPE_PRICES = ['1000', '0', '5000', '10000'];
-  var APARTMENT_CAPACITY_VALUES = ['1', '2', '3', '0'];
-
   var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldset');
 
   window.form = {
@@ -35,10 +31,10 @@
   var pricePerNight = document.querySelector('#price');
 
   // односторонняя синхронизация значения первого поля с минимальным значением второго
-  window.synchronizeFields(apartmentType, pricePerNight, window.data.HOUSE_TYPES, HOUSE_TYPE_PRICES, window.util.syncValueWithMin);
+  window.synchronizeFields(apartmentType, pricePerNight, window.data.HOUSE_TYPES, window.data.HOUSE_TYPE_PRICES, window.util.syncValueWithMin);
 
   // синхронизация поля кол-во Кол-во комнат с Количество мест
   var apartmentRoomsNumber = document.querySelector('#room_number');
   var apartmentCapacity = document.querySelector('#capacity');
-  window.synchronizeFields(apartmentRoomsNumber, apartmentCapacity, ROOM_NUMBERS, APARTMENT_CAPACITY_VALUES, window.util.syncValues);
+  window.synchronizeFields(apartmentRoomsNumber, apartmentCapacity, window.data.ROOM_NUMBERS, window.data.APARTMENT_CAPACITY_VALUES, window.util.syncValues);
 })();

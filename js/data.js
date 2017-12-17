@@ -13,6 +13,9 @@
     CHECKIN_TIMES: ['12:00', '13:00', '14:00'],
     CHECKOUT_TIMES: ['12:00', '13:00', '14:00'],
     HOUSE_TYPES: ['flat', 'house', 'bungalo', 'palace'],
+    ROOM_NUMBERS: ['1', '2', '3', '100'],
+    HOUSE_TYPE_PRICES: ['1000', '0', '5000', '10000'],
+    APARTMENT_CAPACITY_VALUES: ['1', '2', '3', '0'],
     /**
      * Генерирует уникальные объявления
      * @return {Array} массив с уникальными объявлениями
