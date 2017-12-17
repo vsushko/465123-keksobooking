@@ -10,7 +10,7 @@
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
   window.data = {
-    CHECKIN_TIMES:  ['12:00', '13:00', '14:00'],
+    CHECKIN_TIMES: ['12:00', '13:00', '14:00'],
     CHECKOUT_TIMES: ['12:00', '13:00', '14:00'],
     /**
      * Генерирует уникальные объявления
