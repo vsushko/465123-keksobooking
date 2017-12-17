@@ -23,8 +23,8 @@
   // синхронизация полей времени заезда и выезда
   var timeInSelect = document.querySelector('#timein');
   var timeOutSelect = document.querySelector('#timeout');
-  window.synchronizeFields(timeInSelect, timeOutSelect, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], window.util.syncValues);
-  window.synchronizeFields(timeOutSelect, timeInSelect, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], window.util.syncValues);
+  window.synchronizeFields(timeInSelect, timeOutSelect, window.data.CHECKIN_TIMES, window.data.CHECKOUT_TIMES, window.util.syncValues);
+  window.synchronizeFields(timeOutSelect, timeInSelect, window.data.CHECKIN_TIMES, window.data.CHECKOUT_TIMES, window.util.syncValues);
 
   // оинхронизация типа жилья и минимальной цены
   var apartmentType = document.querySelector('#type');
