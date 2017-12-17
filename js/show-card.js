@@ -3,6 +3,9 @@
 
 (function () {
 
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+
   window.showCard = {
     /**
      * Показывает карточку выбранного жилья по нажатию на метку на карте
@@ -61,6 +64,34 @@
             closePopup(currentAdvertisementPopup);
           }
         });
+      }
+    }
+  };
+
+  /**
+   * Обработчик закрытия попапа
+   * @param {Event} event событие
+   */
+  var onPopupEscPress = function (event) {
+    if (event.keyCode === ESC_KEYCODE) {
+      closePopup();
+    }
+  };
+
+  /**
+   * Удаляет попап из DOM
+   * @param {Object} toClosePopup попап для удаления
+   */
+  var closePopup = function (toClosePopup) {
+    if (toClosePopup) {
+      // удаляем ноду, если клик
+      toClosePopup.remove();
+      document.removeEventListener('keydown', onPopupEscPress);
+    } else {
+      // обрабатываем esc
+      var mapCard = document.querySelector('.map__card');
+      if (mapCard) {
+        mapCard.remove();
       }
     }
   };
