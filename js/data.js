@@ -6,12 +6,13 @@
   var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец',
     'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик',
     'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
-  var HOUSE_TYPES = ['flat', 'house', 'bungalo'];
-  var CHECKIN_TIMES = ['12:00', '13:00', '14:00'];
-  var CHECKOUT_TIMES = ['12:00', '13:00', '14:00'];
+
   var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
   window.data = {
+    CHECKIN_TIMES: ['12:00', '13:00', '14:00'],
+    CHECKOUT_TIMES: ['12:00', '13:00', '14:00'],
+    HOUSE_TYPES: ['flat', 'house', 'bungalo', 'palace'],
     /**
      * Генерирует уникальные объявления
      * @return {Array} массив с уникальными объявлениями
@@ -31,11 +32,11 @@
             'title': titles[i],
             'address': locationX + ', ' + locationY,
             'price': window.util.getRandomIntInclusive(999, 1000001),
-            'type': HOUSE_TYPES[window.util.getRandomIntInclusive(0, HOUSE_TYPES.length - 1)],
+            'type': this.HOUSE_TYPES[window.util.getRandomIntInclusive(0, this.HOUSE_TYPES.length - 1)],
             'rooms': window.util.getRandomIntInclusive(0, 6),
             'guests': window.util.getRandomIntInclusive(0, 6),
-            'checkin': CHECKIN_TIMES[window.util.getRandomIntInclusive(0, CHECKIN_TIMES.length - 1)],
-            'checkout': CHECKOUT_TIMES[window.util.getRandomIntInclusive(0, CHECKOUT_TIMES.length - 1)],
+            'checkin': this.CHECKIN_TIMES[window.util.getRandomIntInclusive(0, this.CHECKIN_TIMES.length - 1)],
+            'checkout': this.CHECKOUT_TIMES[window.util.getRandomIntInclusive(0, this.CHECKOUT_TIMES.length - 1)],
             'features': window.util.getRandomizedArrayWithVariableLength(FEATURES),
             'description': '',
             'photos': []

@@ -3,6 +3,10 @@
 
 (function () {
 
+  var ROOM_NUMBERS = ['1', '2', '3', '100'];
+  var HOUSE_TYPE_PRICES = ['1000', '0', '5000', '10000'];
+  var APARTMENT_CAPACITY_VALUES = ['1', '2', '3', '0'];
+
   var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldset');
 
   window.form = {
@@ -20,77 +24,21 @@
   // изначально все поля недоступны
   window.form.setFieldSetInaccessibility(true);
 
-  var timeInSelect = document.getElementById('timein');
-  var timeOutSelect = document.getElementById('timeout');
+  // синхронизация полей времени заезда и выезда
+  var timeInSelect = document.querySelector('#timein');
+  var timeOutSelect = document.querySelector('#timeout');
+  window.synchronizeFields(timeInSelect, timeOutSelect, window.data.CHECKIN_TIMES, window.data.CHECKOUT_TIMES, window.util.syncValues);
+  window.synchronizeFields(timeOutSelect, timeInSelect, window.data.CHECKIN_TIMES, window.data.CHECKOUT_TIMES, window.util.syncValues);
 
-  timeInSelect.addEventListener('change', onChangeTimeInEvent);
+  // оинхронизация типа жилья и минимальной цены
+  var apartmentType = document.querySelector('#type');
+  var pricePerNight = document.querySelector('#price');
 
-  /**
-   * Связывает «время заезда» и «время выезда»
-   */
-  function onChangeTimeInEvent() {
-    timeOutSelect.value = timeInSelect.value;
-  }
+  // односторонняя синхронизация значения первого поля с минимальным значением второго
+  window.synchronizeFields(apartmentType, pricePerNight, window.data.HOUSE_TYPES, HOUSE_TYPE_PRICES, window.util.syncValueWithMin);
 
-  timeOutSelect.addEventListener('change', onChangeTimeOutEvent);
-
-  /**
-   * Связывает «время выезда» и «время заезда»
-   */
-  function onChangeTimeOutEvent() {
-    timeInSelect.value = timeOutSelect.value;
-  }
-
-  var apartmentType = document.getElementById('type');
-  var pricePerNight = document.getElementById('price');
-  apartmentType.addEventListener('change', onChangeApartmentTypeEvent);
-
-  /**
-   * Связывает Тип жилья с минимальной ценой
-   */
-  function onChangeApartmentTypeEvent() {
-    switch (window.card.HOUSE_TYPES_MAP[apartmentType.value]) {
-      case 'Лачуга':
-        pricePerNight.min = 0;
-        break;
-      case 'Квартира':
-        pricePerNight.min = 1000;
-        break;
-      case 'Дом':
-        pricePerNight.min = 1000;
-        break;
-      case 'Дворец':
-        pricePerNight.min = 10000;
-        break;
-      default:
-        pricePerNight.min = 1000;
-    }
-  }
-
-  var apartmentRoomsNumber = document.getElementById('room_number');
-  var apartmentCapacity = document.getElementById('capacity');
-
-  apartmentRoomsNumber.addEventListener('change', onChangeApartmentRoomsNumber);
-
-  /**
-   * Связывает кол-во комнат с кол-вом гостей
-   */
-  function onChangeApartmentRoomsNumber() {
-    switch (parseInt(apartmentRoomsNumber.value, 10)) {
-      case 1:
-        apartmentCapacity.value = 1;
-        break;
-      case 2:
-        apartmentCapacity.value = 2;
-        break;
-      case 3:
-        apartmentCapacity.value = 3;
-        break;
-      case 100:
-        apartmentCapacity.value = 0;
-        break;
-      default:
-        break;
-    }
-  }
+  // синхронизация поля кол-во Кол-во комнат с Количество мест
+  var apartmentRoomsNumber = document.querySelector('#room_number');
+  var apartmentCapacity = document.querySelector('#capacity');
+  window.synchronizeFields(apartmentRoomsNumber, apartmentCapacity, ROOM_NUMBERS, APARTMENT_CAPACITY_VALUES, window.util.syncValues);
 })();
