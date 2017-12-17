@@ -67,6 +67,18 @@
           pinsClasses.remove(classToRemove);
         }
       }
+    },
+    /**
+     * Устанавливает элементу указанное значение
+     */
+    syncValues: function (element, value) {
+      element.value = value;
+    },
+    /**
+     * Устанавливает минимальному элементу указанное значение
+     */
+    syncValueWithMin: function (element, value) {
+      element.min = value;
     }
   };
 })();
