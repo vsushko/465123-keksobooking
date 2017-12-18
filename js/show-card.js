@@ -35,7 +35,7 @@
 
           // найдем объявление
           for (var i = 0; i < advertisements.length; i++) {
-            if (pinImg.src.indexOf(advertisements[i].author.avatar) !== -1) {
+            if (pinImg.alt.indexOf(advertisements[i].offer.title) !== -1) {
               advertisement = advertisements[i];
             }
           }

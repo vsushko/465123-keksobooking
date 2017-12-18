@@ -19,9 +19,9 @@
     buttonElement.setAttribute('style', 'left: ' + (advertisement.location.x + MAP_PIN_INDENT_X) + 'px; top: '
       + (advertisement.location.y + MAP_PIN_INDENT_Y) + 'px;');
 
-
     var buttonImgElement = buttonElement.querySelector('img');
-    buttonImgElement.setAttribute('src', advertisement.author.avatar.toString());
+    buttonImgElement.setAttribute('src', advertisement.author.avatar);
+    buttonImgElement.setAttribute('alt', advertisement.offer.title);
 
     return buttonElement;
   };
