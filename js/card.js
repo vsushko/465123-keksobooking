@@ -3,6 +3,8 @@
 
 (function () {
 
+  var CARD_PHOTO_SIZE = 45;
+
   // создадим DOM-элемент объявления на основе существующего
   var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
 
@@ -24,11 +26,8 @@
         setElementTextContent('.popup__checkin_checkout', 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout);
 
         var fearuresElementsList = advertisementPopup.querySelector('.popup__features');
-
         // удаляем предзаполненные фичи из шаблона
-        while (fearuresElementsList.firstChild) {
-          fearuresElementsList.removeChild(fearuresElementsList.firstChild);
-        }
+        window.util.removeFirstChilds(fearuresElementsList);
 
         // создаем те которые есть в объявлении
         for (var i = 0; i < advertisement.offer.features.length; i++) {
@@ -38,8 +37,25 @@
         }
 
         setElementTextContent('.popup__description', advertisement.offer.description);
-        advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author);
+        advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author.avatar);
+
+        var photosElementsList = advertisementPopup.querySelector('.popup__pictures');
+        // удаляем предзаполненные фото из шаблона
+        window.util.removeFirstChilds(photosElementsList);
+
+        // добавляем фото
+        for (var j = 0; j < advertisement.offer.photos.length; j++) {
+          var newPhotoElement = document.createElement('li');
+          var newPhotoImg = document.createElement('img');
+          newPhotoImg.setAttribute('src', advertisement.offer.photos[j]);
+          newPhotoImg.setAttribute('width', CARD_PHOTO_SIZE);
+          newPhotoImg.setAttribute('height', CARD_PHOTO_SIZE);
+          newPhotoImg.setAttribute('style', 'margin-right: 5px;');
+          newPhotoElement.appendChild(newPhotoImg);
+          photosElementsList.appendChild(newPhotoElement);
+        }
       }
+
       return advertisementPopup;
     }
   };
