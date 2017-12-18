@@ -11,11 +11,11 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        onLoad(xhr.response)
+        onLoad(xhr.response);
       } else {
         onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
       }
-    })
+    });
 
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
@@ -31,6 +31,8 @@
   window.backend = {
     /**
      * Получает с сервера данные
+     * @param {function} onLoad callback успешной обработки
+     * @param {function} onError callback неуспешной обработки обработки
      */
     load: function (onLoad, onError) {
       var xhr = setup(onLoad, onError);
@@ -39,6 +41,9 @@
     },
     /**
      * Отправляет данные формы на сервер
+     * @param {Object} data данные
+     * @param {function} onLoad callback успешной обработки
+     * @param {function} onError callback неуспешной обработки обработки
      */
     save: function (data, onLoad, onError) {
       var xhr = setup(onLoad, onError);

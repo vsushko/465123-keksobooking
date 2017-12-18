@@ -10,11 +10,10 @@
 
   /**
    * Возвращает склонированную ноду кнопки с меткой
-   * @param {Object} pinButton DOM-элемент пина для содания других пинов
    * @param {Object} advertisement объявление
    * @return {Object} нода
    */
-  var renderAdvertisementPin = function (pinButton, advertisement) {
+  var renderAdvertisementPin = function (advertisement) {
     var buttonElement = pinButton.cloneNode(true);
 
     buttonElement.setAttribute('style', 'left: ' + (advertisement.location.x + MAP_PIN_INDENT_X) + 'px; top: '
@@ -37,7 +36,7 @@
       var buttonsFragment = document.createDocumentFragment();
 
       for (var i = 0; i < advertisements.length; i++) {
-        buttonsFragment.appendChild(renderAdvertisementPin(pinButton, advertisements[i]));
+        buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
       }
       return buttonsFragment;
     }

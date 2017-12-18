@@ -26,11 +26,8 @@
         setElementTextContent('.popup__checkin_checkout', 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout);
 
         var fearuresElementsList = advertisementPopup.querySelector('.popup__features');
-
         // удаляем предзаполненные фичи из шаблона
-        while (fearuresElementsList.firstChild) {
-          fearuresElementsList.removeChild(fearuresElementsList.firstChild);
-        }
+        window.util.removeFirstChilds(fearuresElementsList);
 
         // создаем те которые есть в объявлении
         for (var i = 0; i < advertisement.offer.features.length; i++) {
@@ -43,17 +40,14 @@
         advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author.avatar);
 
         var photosElementsList = advertisementPopup.querySelector('.popup__pictures');
-
-        // удаляем предзаполненные фичи из шаблона
-        while (photosElementsList.firstChild) {
-          photosElementsList.removeChild(photosElementsList.firstChild);
-        }
+        // удаляем предзаполненные фото из шаблона
+        window.util.removeFirstChilds(photosElementsList);
 
         // добавляем фото
-        for (var i = 0; i < advertisement.offer.photos.length; i++) {
+        for (var j = 0; j < advertisement.offer.photos.length; j++) {
           var newPhotoElement = document.createElement('li');
           var newPhotoImg = document.createElement('img');
-          newPhotoImg.setAttribute('src', advertisement.offer.photos[i]);
+          newPhotoImg.setAttribute('src', advertisement.offer.photos[j]);
           newPhotoImg.setAttribute('width', CARD_PHOTO_SIZE);
           newPhotoImg.setAttribute('height', CARD_PHOTO_SIZE);
           newPhotoImg.setAttribute('style', 'margin-right: 5px;');

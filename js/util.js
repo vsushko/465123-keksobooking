@@ -86,6 +86,16 @@
     },
 
     /**
+     * Удаляет первые элеметы у указанного элемента
+     * @param {Object} elementWithChilds список элементов
+     */
+    removeFirstChilds: function(elementWithChilds) {
+      while (elementWithChilds.firstChild) {
+        elementWithChilds.removeChild(elementWithChilds.firstChild);
+      }
+    },
+
+    /**
      * Добавляет в дом элемент с указанным сообщением об ошибке
      * @param {String} errorMessage сообщение
      */

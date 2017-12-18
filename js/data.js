@@ -17,7 +17,7 @@
   var onLoad = function (data) {
     window.data = {
       advertisements: data
-    }
+    };
   };
 
   // получим данные с сервера
