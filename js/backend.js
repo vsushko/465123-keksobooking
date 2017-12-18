@@ -1,15 +1,6 @@
 
 'use strict';
 
-
-/*window.backend.load = (function () {
-  return function (onLoad, onError, callback) {
-    if (typeof callback === 'function') {
-      callback(onLoad, onError);
-    }
-  }
-})();*/
-
 (function () {
   var SERVER_URL = 'https://1510.dump.academy/keksobooking';
 
@@ -45,6 +36,14 @@
       var xhr = setup(onLoad, onError);
       xhr.open('GET', SERVER_URL + '/data');
       xhr.send();
+    },
+    /**
+     * Отправляет данные формы на сервер
+     */
+    save: function (data, onLoad, onError) {
+      var xhr = setup(onLoad, onError);
+      xhr.open('POST', SERVER_URL);
+      xhr.send(data);
     }
   };
 })();

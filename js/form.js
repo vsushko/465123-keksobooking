@@ -10,7 +10,8 @@
   var APARTMENT_CAPACITY_VALUES = ['1', '2', '3', '0'];
   var ROOM_NUMBERS = ['1', '2', '3', '100'];
 
-  var fieldSet = document.querySelector('.notice__form').querySelectorAll('fieldset');
+  var form = document.querySelector('.notice__form');
+  var fieldSet = form.querySelectorAll('fieldset');
 
   window.form = {
     /**
@@ -44,4 +45,12 @@
   var apartmentRoomsNumber = document.querySelector('#room_number');
   var apartmentCapacity = document.querySelector('#capacity');
   window.synchronizeFields(apartmentRoomsNumber, apartmentCapacity, ROOM_NUMBERS, APARTMENT_CAPACITY_VALUES, window.util.syncValues);
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    window.backend.save(new FormData(form), function () {
+      form.reset();
+    }, window.util.onError);
+  });
 })();

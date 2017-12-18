@@ -83,6 +83,22 @@
      */
     syncValueWithMin: function (element, value) {
       element.min = value;
+    },
+
+    /**
+     * Добавляет в дом элемент с указанным сообщением об ошибке
+     * @param {String} errorMessage сообщение
+     */
+    onError: function (errorMessage) {
+      var node = document.createElement('div');
+      node.style = 'z-index: 100; margin: 0 auto; font-weight: bold; text-align: center; border-top-right-radius: 0; border-top-left-radius: 0; box-shadow: 0 5px 20px -8px rgba(0, 0, 0, 0.5); border: 1px solid transparent; border-radius: 4px; color: #c09853; background-color: #fcf8e3; border-color: #fbeed5;';
+      node.style.position = 'absolute';
+      node.style.left = 0;
+      node.style.right = 0;
+      node.style.fontSize = '14px';
+
+      node.textContent = 'Произошла ошибка: ' + errorMessage + '. Попробуйте еще раз.';
+      document.body.insertAdjacentElement('afterbegin', node);
     }
   };
 })();

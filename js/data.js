@@ -7,7 +7,7 @@
   * @param {String} message сообщение об ошибке
   */
   var onError = function (message) {
-    console.error(message);
+    window.util.onError(message);
   };
 
   /**
@@ -15,7 +15,6 @@
    * @param {Object} data набор полученных данных
    */
   var onLoad = function (data) {
-    console.log(data);
     window.data = {
       advertisements: data
     }
