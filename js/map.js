@@ -3,15 +3,6 @@
 
 var ENTER_KEYCODE = 13;
 
-// найдем DOM-элемент пина
-var pinButton = document.querySelector('.map__pin');
-
-// сгеренируем данные для пинов
-window.pin.advertisements = window.data.generateSimilarAdvertisements();
-
-// сгенерируем пины на основе существующего
-var pinButtonsFragment = window.pin.generateAdvertisementPins(pinButton);
-
 var mapPinButton = document.querySelector('.map__pin--main');
 
 mapPinButton.addEventListener('mouseup', function () {
@@ -21,6 +12,9 @@ mapPinButton.addEventListener('mouseup', function () {
 
   // элемент куда будем вставлять объявления
   var mapPinsContainer = document.querySelector('.map__pins');
+
+  // сгенерируем пины на основе существующего
+  var pinButtonsFragment = window.pin.generateAdvertisementPins(window.data.advertisements);
 
   // вставляем сгенерированные
   mapPinsContainer.appendChild(pinButtonsFragment);
@@ -32,12 +26,12 @@ mapPinButton.addEventListener('mouseup', function () {
   window.form.setFieldSetInaccessibility(false);
 
   mapPinsContainer.addEventListener('click', function () {
-    window.showCard.showCard(mapPinsContainer);
+    window.showCard.showCard(window.data.advertisements, mapPinsContainer);
   });
 
   mapPinsContainer.addEventListener('keydown', function (event) {
     if (event.keyCode === ENTER_KEYCODE) {
-      window.showCard.showCard(mapPinsContainer);
+      window.showCard.showCard(window.data.advertisements, mapPinsContainer);
     }
   });
 });

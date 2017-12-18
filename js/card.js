@@ -3,6 +3,8 @@
 
 (function () {
 
+  var CARD_PHOTO_SIZE = 45;
+
   // создадим DOM-элемент объявления на основе существующего
   var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
 
@@ -38,8 +40,28 @@
         }
 
         setElementTextContent('.popup__description', advertisement.offer.description);
-        advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author);
+        advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author.avatar);
+
+        var photosElementsList = advertisementPopup.querySelector('.popup__pictures');
+
+        // удаляем предзаполненные фичи из шаблона
+        while (photosElementsList.firstChild) {
+          photosElementsList.removeChild(photosElementsList.firstChild);
+        }
+
+        // добавляем фото
+        for (var i = 0; i < advertisement.offer.photos.length; i++) {
+          var newPhotoElement = document.createElement('li');
+          var newPhotoImg = document.createElement('img');
+          newPhotoImg.setAttribute('src', advertisement.offer.photos[i]);
+          newPhotoImg.setAttribute('width', CARD_PHOTO_SIZE);
+          newPhotoImg.setAttribute('height', CARD_PHOTO_SIZE);
+          newPhotoImg.setAttribute('style', 'margin-right: 5px;');
+          newPhotoElement.appendChild(newPhotoImg);
+          photosElementsList.appendChild(newPhotoElement);
+        }
       }
+
       return advertisementPopup;
     }
   };

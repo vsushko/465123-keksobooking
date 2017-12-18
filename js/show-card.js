@@ -9,12 +9,12 @@
   window.showCard = {
     /**
      * Показывает карточку выбранного жилья по нажатию на метку на карте
+     * @param {Array} advertisements объявления
      * @param {Object} mapPinsContainer контейнер с кнопками
      */
-    showCard: function (mapPinsContainer) {
+    showCard: function (advertisements, mapPinsContainer) {
       var clickedPin = event.target;
       var currentAdvertisementPopup;
-      var generatedAdvertisements = window.pin.advertisements;
 
       if (clickedPin) {
         // либо это клик мышкой по пину, либо нажали ENTER
@@ -34,9 +34,9 @@
           }
 
           // найдем объявление
-          for (var i = 0; i < generatedAdvertisements.length; i++) {
-            if (pinImg.src.indexOf(generatedAdvertisements[i].author) !== -1) {
-              advertisement = generatedAdvertisements[i];
+          for (var i = 0; i < advertisements.length; i++) {
+            if (pinImg.src.indexOf(advertisements[i].author.avatar) !== -1) {
+              advertisement = advertisements[i];
             }
           }
 
