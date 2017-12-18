@@ -89,7 +89,7 @@
      * Удаляет первые элеметы у указанного элемента
      * @param {Object} elementWithChilds список элементов
      */
-    removeFirstChilds: function(elementWithChilds) {
+    removeFirstChilds: function (elementWithChilds) {
       while (elementWithChilds.firstChild) {
         elementWithChilds.removeChild(elementWithChilds.firstChild);
       }
