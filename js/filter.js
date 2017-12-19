@@ -92,7 +92,7 @@
           mapPin.classList.remove('hidden');
         }
 
-        // скрыть карточку объявления если есть активная
+        window.closeCard.closePopup();
       });
     });
   });

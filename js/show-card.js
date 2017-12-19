@@ -56,12 +56,12 @@
       if (currentAdvertisementPopup) {
         var closePopupButton = document.querySelector('.popup__close');
         closePopupButton.addEventListener('click', function () {
-          closePopup(currentAdvertisementPopup);
+          window.closeCard.closePopup(currentAdvertisementPopup);
         });
 
         currentAdvertisementPopup.addEventListener('keydown', function (evt) {
           if (evt.keyCode === ENTER_KEYCODE) {
-            closePopup(currentAdvertisementPopup);
+            window.closeCard.closePopup(currentAdvertisementPopup);
           }
         });
       }
@@ -74,25 +74,28 @@
    */
   var onPopupEscPress = function (event) {
     if (event.keyCode === ESC_KEYCODE) {
-      closePopup();
+      window.closeCard.closePopup();
     }
   };
 
-  /**
-   * Удаляет попап из DOM
-   * @param {Object} toClosePopup попап для удаления
-   */
-  var closePopup = function (toClosePopup) {
-    if (toClosePopup) {
-      // удаляем ноду, если клик
-      toClosePopup.remove();
-      document.removeEventListener('keydown', onPopupEscPress);
-    } else {
-      // обрабатываем esc
-      var mapCard = document.querySelector('.map__card');
-      if (mapCard) {
-        mapCard.remove();
+  window.closeCard = {
+    /**
+     * Удаляет попап из DOM
+     * @param {Object} toClosePopup попап для удаления
+     */
+    closePopup: function (toClosePopup) {
+      if (toClosePopup) {
+        // удаляем ноду, если клик
+        toClosePopup.remove();
+        document.removeEventListener('keydown', onPopupEscPress);
+      } else {
+        // обрабатываем esc
+        var mapCard = document.querySelector('.map__card');
+        if (mapCard) {
+          mapCard.remove();
+        }
       }
     }
   };
+
 })();
