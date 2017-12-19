@@ -24,7 +24,7 @@
     // добавим данные о объявлени в ноду пина
     buttonElement.data = advertisement;
     // установим кликабельный курсор
-    buttonElement.style.cursor = "pointer";
+    buttonElement.style.cursor = 'pointer';
 
     return buttonElement;
   };
@@ -41,7 +41,8 @@
       var buttonsFragment = document.createDocumentFragment();
 
       for (var i = 0; i < advertisements.length; i++) {
-        buttonsFragment.appendChild(renderAdvertisementPin(advertisements[i]));
+        var generatedAdvertisement = renderAdvertisementPin(advertisements[i]);
+        buttonsFragment.appendChild(generatedAdvertisement);
       }
       return buttonsFragment;
     }
