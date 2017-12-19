@@ -3,9 +3,6 @@
 
 (function () {
 
-  // ms
-  var DEBOUNCE_INTERVAL = 300;
-
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
   // пины
@@ -101,5 +98,5 @@
     });
     // закрываем popup
     window.closeCard.closePopup();
-  }
+  };
 })();
