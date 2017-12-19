@@ -23,6 +23,9 @@
     buttonImgElement.setAttribute('src', advertisement.author.avatar);
     buttonImgElement.setAttribute('alt', advertisement.offer.title);
 
+    // добавим данные о объявлени в ноду пина
+    buttonElement.data = advertisement;
+
     return buttonElement;
   };
 

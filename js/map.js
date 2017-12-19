@@ -2,6 +2,7 @@
 'use strict';
 
 var ENTER_KEYCODE = 13;
+var INITIAL_PINS_COUNT = 3;
 
 var mapPinButton = document.querySelector('.map__pin--main');
 
