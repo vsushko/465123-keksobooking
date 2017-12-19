@@ -93,6 +93,7 @@
         var mapCard = document.querySelector('.map__card');
         if (mapCard) {
           mapCard.remove();
+          document.removeEventListener('keydown', onPopupEscPress);
         }
       }
     }
