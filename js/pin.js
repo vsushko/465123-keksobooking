@@ -23,6 +23,8 @@
 
     // добавим данные о объявлени в ноду пина
     buttonElement.data = advertisement;
+    // установим кликабельный курсор
+    buttonElement.style.cursor = "pointer";
 
     return buttonElement;
   };
