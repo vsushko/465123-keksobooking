@@ -72,7 +72,8 @@ mapPinButton.addEventListener('mousedown', function (evt) {
       mapPinButton.style.left = newCoordXValue + 'px';
 
       var addressField = document.getElementById('address');
-      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + 20, 10) + ', y: ' + parseInt(mapPinButton.style.top + 44, 10);
+      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + window.pin.MAP_PIN_INDENT_X, 10)
+        + ', y: ' + parseInt(mapPinButton.style.top + window.pin.MAP_PIN_INDENT_Y, 10);
     }
   };
 

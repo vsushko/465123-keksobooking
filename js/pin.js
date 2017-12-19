@@ -2,8 +2,6 @@
 'use strict';
 
 (function () {
-  var MAP_PIN_INDENT_X = 20;
-  var MAP_PIN_INDENT_Y = 44;
 
   // найдем DOM-элемент пина
   var pinButton = document.querySelector('.map__pin');
@@ -16,8 +14,8 @@
   var renderAdvertisementPin = function (advertisement) {
     var buttonElement = pinButton.cloneNode(true);
 
-    buttonElement.setAttribute('style', 'left: ' + (advertisement.location.x + MAP_PIN_INDENT_X) + 'px; top: '
-      + (advertisement.location.y + MAP_PIN_INDENT_Y) + 'px;');
+    buttonElement.setAttribute('style', 'left: ' + (advertisement.location.x + window.pin.MAP_PIN_INDENT_X) + 'px; top: '
+      + (advertisement.location.y + window.pin.MAP_PIN_INDENT_Y) + 'px;');
 
     var buttonImgElement = buttonElement.querySelector('img');
     buttonImgElement.setAttribute('src', advertisement.author.avatar);
@@ -30,6 +28,8 @@
   };
 
   window.pin = {
+    MAP_PIN_INDENT_X: 20,
+    MAP_PIN_INDENT_Y: 44,
     /**
      * Генерирует пины по переданному списку объявлений
      * @param {Array} advertisements объявления
