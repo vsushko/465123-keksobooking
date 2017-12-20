@@ -8,6 +8,10 @@
   */
   var onError = function (message) {
     window.util.onError(message);
+
+    window.data = {
+      advertisements: []
+    };
   };
 
   /**
