@@ -13,18 +13,6 @@
   var form = document.querySelector('.notice__form');
   var fieldSet = form.querySelectorAll('fieldset');
 
-  window.form = {
-    /**
-     * Делает поля активными в зависимости от переданного флага
-     * @param {Boolean} deactivated флаг неактивности
-     */
-    setFieldSetInaccessibility: function (deactivated) {
-      for (var i = 0; i < fieldSet.length; i++) {
-        fieldSet[i].disabled = deactivated;
-      }
-    }
-  };
-
   // изначально все поля недоступны
   window.form.setFieldSetInaccessibility(true);
 
@@ -46,6 +34,7 @@
   var apartmentCapacity = document.querySelector('#capacity');
   window.synchronizeFields(apartmentRoomsNumber, apartmentCapacity, ROOM_NUMBERS, APARTMENT_CAPACITY_VALUES, window.util.syncValues);
 
+  // добавляем обработчик на отправку формы
   form.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -53,4 +42,16 @@
       form.reset();
     }, window.util.onError);
   });
+
+  window.form = {
+    /**
+     * Делает поля активными в зависимости от переданного флага
+     * @param {Boolean} deactivated флаг неактивности
+     */
+    setFieldSetInaccessibility: function (deactivated) {
+      for (var i = 0; i < fieldSet.length; i++) {
+        fieldSet[i].disabled = deactivated;
+      }
+    }
+  };
 })();
