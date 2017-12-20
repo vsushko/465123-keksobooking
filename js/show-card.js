@@ -12,7 +12,7 @@
  */
   var onPopupEscPress = function (event) {
     if (event.keyCode === ESC_KEYCODE) {
-      window.showCard.closePopup();
+      window.showCard.closePopup(false);
     }
   };
 
