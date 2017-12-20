@@ -4,6 +4,9 @@
 var ENTER_KEYCODE = 13;
 var INITIAL_PINS_COUNT = 1;
 
+// изначально все поля формы недоступны
+window.form.setFieldSetInaccessibility(true);
+
 var mapPinButton = document.querySelector('.map__pin--main');
 
 mapPinButton.addEventListener('mouseup', function () {

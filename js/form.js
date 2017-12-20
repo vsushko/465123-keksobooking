@@ -51,7 +51,4 @@
       }
     }
   };
-
-  // изначально все поля недоступны
-  window.form.setFieldSetInaccessibility(true);
 })();
