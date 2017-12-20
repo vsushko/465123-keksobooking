@@ -13,9 +13,6 @@
   var form = document.querySelector('.notice__form');
   var fieldSet = form.querySelectorAll('fieldset');
 
-  // изначально все поля недоступны
-  window.form.setFieldSetInaccessibility(true);
-
   // синхронизация полей времени заезда и выезда
   var timeInSelect = document.querySelector('#timein');
   var timeOutSelect = document.querySelector('#timeout');
@@ -54,4 +51,7 @@
       }
     }
   };
+
+  // изначально все поля недоступны
+  window.form.setFieldSetInaccessibility(true);
 })();
