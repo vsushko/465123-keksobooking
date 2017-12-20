@@ -4,7 +4,6 @@
 (function () {
 
   var MAX_PINS_AMOUNT_TO_SHOW = 5;
-  var FIRST_GENERATED_PIN_ELEMENT_INDEX = 2;
 
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
@@ -25,10 +24,12 @@
 
   // добавим обработчик который будет отлавливать изменения на панели фильтров
   mapFilters.addEventListener('change', function () {
-    // проинициализируем пины для фильтрации
-    filteringPins = Array.from(mapPins.children).slice(FIRST_GENERATED_PIN_ELEMENT_INDEX);
+
+    filteringPins = Array.from(mapPins.children);
+    // отфильтруем пины чтобы остались только загруженные
+    var usersPins = filteringPins.filter(window.util.isElementDataExist);
     // отфильтруем пины
-    window.debounce(filterPins(filteringPins));
+    window.debounce(filterPins(usersPins));
     // закрываем popup
     window.closeCard.closePopup();
   });

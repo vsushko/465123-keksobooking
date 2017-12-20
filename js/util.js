@@ -45,6 +45,14 @@
     },
 
     /**
+     * Возвращает флаг наличия в элементе поля с данными
+     * @param {String} elementWithData сообщение
+     */
+    isElementDataExist: function (elementWithData) {
+      return elementWithData.data !== undefined;
+    },
+
+    /**
      * Добавляет в дом элемент с указанным сообщением об ошибке
      * @param {String} errorMessage сообщение
      */
