@@ -13,6 +13,11 @@
   var form = document.querySelector('.notice__form');
   var fieldSet = form.querySelectorAll('fieldset');
 
+  // зададим начальные координаты пина пользователю
+  var pinButton = document.querySelector('.map__pin');
+  var addressField = document.querySelector('#address');
+  addressField.value = 'x: ' + pinButton.offsetLeft + ', y: ' + pinButton.offsetTop;
+
   // синхронизация полей времени заезда и выезда
   var timeInSelect = document.querySelector('#timein');
   var timeOutSelect = document.querySelector('#timeout');
