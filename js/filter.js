@@ -40,10 +40,6 @@
     visiblePinsCount = 0;
 
     toFilteringPins.filter(function (mapPin) {
-      /*if (mapPin.classList.contains('hidden')) {
-        mapPin.classList.remove('hidden');
-      }*/
-
       var filtered = false;
 
       // селектор типа жилья

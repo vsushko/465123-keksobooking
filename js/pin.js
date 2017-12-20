@@ -3,7 +3,7 @@
 
 (function () {
 
-   var MAX_PINS_AMOUNT_TO_SHOW = 5;
+  var MAX_PINS_AMOUNT_TO_SHOW = 5;
 
   // найдем DOM-элемент пина
   var pinButton = document.querySelector('.map__pin');
