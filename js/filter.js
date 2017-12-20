@@ -44,7 +44,7 @@
 
       // селектор типа жилья
       var housingTypeSelector = housingTypeSelect.options[housingTypeSelect.selectedIndex];
-      var currentHousingType = window.card.HOUSE_TYPES_MAP[mapPin.data.offer.type];
+      var currentHousingType = window.card.houseTypeMap[mapPin.data.offer.type];
       var isAnyHousingTypeSelected = housingTypeSelector.value === 'any';
 
       if (currentHousingType !== housingTypeSelector.text && !(isAnyHousingTypeSelected)) {
