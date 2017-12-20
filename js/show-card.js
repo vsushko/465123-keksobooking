@@ -6,6 +6,16 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
+  /**
+ * Обработчик закрытия попапа
+ * @param {Event} event событие
+ */
+  var onPopupEscPress = function (event) {
+    if (event.keyCode === ESC_KEYCODE) {
+      window.showCard.closePopup();
+    }
+  };
+
   window.showCard = {
     /**
      * Показывает карточку выбранного жилья по нажатию на метку на карте
@@ -56,29 +66,16 @@
       if (currentAdvertisementPopup) {
         var closePopupButton = document.querySelector('.popup__close');
         closePopupButton.addEventListener('click', function () {
-          window.closeCard.closePopup(currentAdvertisementPopup);
+          window.showCard.closePopup(currentAdvertisementPopup);
         });
 
         currentAdvertisementPopup.addEventListener('keydown', function (evt) {
           if (evt.keyCode === ENTER_KEYCODE) {
-            window.closeCard.closePopup(currentAdvertisementPopup);
+            window.showCard.closePopup(currentAdvertisementPopup);
           }
         });
       }
-    }
-  };
-
-  /**
-   * Обработчик закрытия попапа
-   * @param {Event} event событие
-   */
-  var onPopupEscPress = function (event) {
-    if (event.keyCode === ESC_KEYCODE) {
-      window.closeCard.closePopup();
-    }
-  };
-
-  window.closeCard = {
+    },
     /**
      * Удаляет попап из DOM
      * @param {Object} toClosePopup попап для удаления
@@ -98,5 +95,4 @@
       }
     }
   };
-
 })();

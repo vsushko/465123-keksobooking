@@ -31,7 +31,7 @@
     // отфильтруем пины
     window.debounce(filterPins(usersPins));
     // закрываем popup
-    window.closeCard.closePopup();
+    window.showCard.closePopup();
   });
 
   /**
