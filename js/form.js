@@ -5,8 +5,8 @@
 
   var CHECKIN_TIMES = ['12:00', '13:00', '14:00'];
   var CHECKOUT_TIMES = ['12:00', '13:00', '14:00'];
-  var HOUSE_TYPES = ['flat', 'house', 'bungalo', 'palace'];
-  var HOUSE_TYPE_PRICES = ['1000', '0', '5000', '10000'];
+  var HOUSE_TYPES = ['shack', 'flat', 'house', 'bungalo', 'palace'];
+  var HOUSE_TYPE_PRICES = ['0', '1000', '5000', '5000', '10000'];
   var APARTMENT_CAPACITY_VALUES = ['1', '2', '3', '0'];
   var ROOM_NUMBERS = ['1', '2', '3', '100'];
 
@@ -24,7 +24,7 @@
   window.synchronizeFields(timeInSelect, timeOutSelect, CHECKIN_TIMES, CHECKOUT_TIMES, window.util.syncValues);
   window.synchronizeFields(timeOutSelect, timeInSelect, CHECKIN_TIMES, CHECKOUT_TIMES, window.util.syncValues);
 
-  // оинхронизация типа жилья и минимальной цены
+  // синхронизация типа жилья и минимальной цены
   var apartmentType = document.querySelector('#type');
   var pricePerNight = document.querySelector('#price');
 
