@@ -4,6 +4,8 @@
 (function () {
 
   var MAX_PINS_AMOUNT_TO_SHOW = 5;
+  var SELECTOR_ANY_VALUE = 'any';
+  var HIDDEN_CLASS_NAME = 'hidden';
 
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
@@ -42,7 +44,7 @@
       // селектор типа жилья
       var housingTypeSelector = housingTypeSelect.options[housingTypeSelect.selectedIndex];
       var currentHousingType = window.card.houseTypeMap[mapPin.data.offer.type];
-      var isAnyHousingTypeSelected = housingTypeSelector.value === 'any';
+      var isAnyHousingTypeSelected = housingTypeSelector.value === SELECTOR_ANY_VALUE;
 
       if (currentHousingType !== housingTypeSelector.text && !(isAnyHousingTypeSelected)) {
         filtered = true;
@@ -51,7 +53,7 @@
       // селектор цены
       var housingPriceSelectorValue = housingPriceSelect.options[housingPriceSelect.selectedIndex].value;
       var currentHousingPrice = mapPin.data.offer.price;
-      var isAnyHousingPriceSelected = housingPriceSelectorValue === 'any';
+      var isAnyHousingPriceSelected = housingPriceSelectorValue === SELECTOR_ANY_VALUE;
 
       if (!isAnyHousingPriceSelected) {
         if (housingPriceSelectorValue === 'middle' && !(currentHousingPrice <= 50000 && currentHousingPrice >= 10000)) {
@@ -66,7 +68,7 @@
       // селектор числа комнат
       var housingRoomsSelectorValue = housingRoomsSelect.options[housingRoomsSelect.selectedIndex].value;
       var currentHousingRooms = mapPin.data.offer.rooms;
-      var isAnyRoomsSelected = housingRoomsSelectorValue === 'any';
+      var isAnyRoomsSelected = housingRoomsSelectorValue === SELECTOR_ANY_VALUE;
 
       if (parseInt(housingRoomsSelectorValue, 10) !== currentHousingRooms && !(isAnyRoomsSelected)) {
         filtered = true;
@@ -75,7 +77,7 @@
       // селектор числа гостей
       var housingGuestsSelectorValue = housingGuestsSelect.options[housingGuestsSelect.selectedIndex].value;
       var currentHousingGuests = mapPin.data.offer.guests;
-      var isAnyGuestsSelected = housingGuestsSelectorValue === 'any';
+      var isAnyGuestsSelected = housingGuestsSelectorValue === SELECTOR_ANY_VALUE;
 
       if (parseInt(housingGuestsSelectorValue, 10) !== currentHousingGuests && !(isAnyGuestsSelected)) {
         filtered = true;
@@ -92,10 +94,10 @@
       }
 
       if (filtered || visiblePinsCount >= MAX_PINS_AMOUNT_TO_SHOW - 1) {
-        mapPin.classList.add('hidden');
+        mapPin.classList.add(HIDDEN_CLASS_NAME);
       } else if (visiblePinsCount < MAX_PINS_AMOUNT_TO_SHOW) {
         visiblePinsCount++;
-        mapPin.classList.remove('hidden');
+        mapPin.classList.remove(HIDDEN_CLASS_NAME);
       }
     });
   };
