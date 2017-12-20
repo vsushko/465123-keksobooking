@@ -47,9 +47,10 @@
     /**
      * Возвращает флаг наличия в элементе поля с данными
      * @param {String} elementWithData сообщение
+     * @return {Object} результат сравнения
      */
     isElementDataExist: function (elementWithData) {
-      return elementWithData.data !== undefined;
+      return !!elementWithData.data;
     },
 
     /**
