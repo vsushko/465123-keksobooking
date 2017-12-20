@@ -16,16 +16,10 @@
   var housingGuestsSelect = document.querySelector('#housing-guests');
   var housingFeatures = document.querySelector('#housing-features');
 
-  // пины для фильтрации
-  var filteringPins;
-
-  // кол-во видимых пинов
-  var visiblePinsCount;
-
   // добавим обработчик который будет отлавливать изменения на панели фильтров
   mapFilters.addEventListener('change', function () {
-
-    filteringPins = Array.from(mapPins.children);
+    // пины для фильтрации
+    var filteringPins = Array.from(mapPins.children);
     // отфильтруем пины чтобы остались только загруженные
     var usersPins = filteringPins.filter(window.util.isElementDataExist);
     // отфильтруем пины
@@ -39,7 +33,8 @@
    * @param {Object} toFilteringPins пины для фильтрации
    */
   var filterPins = function (toFilteringPins) {
-    visiblePinsCount = 0;
+    // кол-во видимых пинов
+    var visiblePinsCount = 0;
 
     toFilteringPins.filter(function (mapPin) {
       var filtered = false;
