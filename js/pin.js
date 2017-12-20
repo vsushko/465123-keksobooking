@@ -3,6 +3,8 @@
 
 (function () {
 
+   var MAX_PINS_AMOUNT_TO_SHOW = 5;
+
   // найдем DOM-элемент пина
   var pinButton = document.querySelector('.map__pin');
 
@@ -42,6 +44,10 @@
 
       for (var i = 0; i < advertisements.length; i++) {
         var generatedAdvertisement = renderAdvertisementPin(advertisements[i]);
+        // показываем не больше доступного числа пинов
+        if (i >= MAX_PINS_AMOUNT_TO_SHOW - 1) {
+          generatedAdvertisement.classList.add('hidden');
+        }
         buttonsFragment.appendChild(generatedAdvertisement);
       }
       return buttonsFragment;

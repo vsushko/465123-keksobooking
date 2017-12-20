@@ -3,6 +3,8 @@
 
 (function () {
 
+  var MAX_PINS_AMOUNT_TO_SHOW = 5;
+
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
   // пины
@@ -17,12 +19,17 @@
   // пины для фильтрации
   var filteringPins;
 
+  // кол-во видимых пинов
+  var visiblePinsCount;
+
   // добавим обработчик который будет отлавливать изменения на панели фильтров
   mapFilters.addEventListener('change', function () {
     // проинициализируем пины для фильтрации
     filteringPins = Array.from(mapPins.children).slice(2);
     // отфильтруем пины
     window.debounce(filterPins(filteringPins));
+    // закрываем popup
+    window.closeCard.closePopup();
   });
 
   /**
@@ -30,11 +37,12 @@
    * @param {Object} toFilteringPins пины для фильтрации
    */
   var filterPins = function (toFilteringPins) {
+    visiblePinsCount = 0;
 
     toFilteringPins.filter(function (mapPin) {
-      if (mapPin.classList.contains('hidden')) {
+      /*if (mapPin.classList.contains('hidden')) {
         mapPin.classList.remove('hidden');
-      }
+      }*/
 
       var filtered = false;
 
@@ -50,16 +58,16 @@
       // селектор цены
       var housingPriceSelectorValue = housingPriceSelect.options[housingPriceSelect.selectedIndex].value;
       var currentHousingPrice = mapPin.data.offer.price;
+      var isAnyHousingPriceSelected = housingPriceSelectorValue === 'any';
 
-      if (housingPriceSelectorValue === 'middle' && !(currentHousingPrice <= 50000 && currentHousingPrice >= 10000)) {
-        filtered = true;
-      } else if (housingPriceSelectorValue === 'low' && !(currentHousingPrice < 10000)) {
-        filtered = true;
-      } else if (housingPriceSelectorValue === 'high' && !(currentHousingPrice > 50000)) {
-        filtered = true;
-      } else if (!filtered && !(housingPriceSelectorValue === 'any')) {
-        filtered = false;
-        mapPin.classList.remove('hidden');
+      if (!isAnyHousingPriceSelected) {
+        if (housingPriceSelectorValue === 'middle' && !(currentHousingPrice <= 50000 && currentHousingPrice >= 10000)) {
+          filtered = true;
+        } else if (housingPriceSelectorValue === 'low' && !(currentHousingPrice < 10000)) {
+          filtered = true;
+        } else if (housingPriceSelectorValue === 'high' && !(currentHousingPrice > 50000)) {
+          filtered = true;
+        }
       }
 
       // селектор числа комнат
@@ -90,13 +98,12 @@
         }
       }
 
-      if (filtered) {
+      if (filtered || visiblePinsCount >= MAX_PINS_AMOUNT_TO_SHOW - 1) {
         mapPin.classList.add('hidden');
-      } else {
+      } else if (visiblePinsCount < MAX_PINS_AMOUNT_TO_SHOW) {
+        visiblePinsCount++;
         mapPin.classList.remove('hidden');
       }
     });
-    // закрываем popup
-    window.closeCard.closePopup();
   };
 })();
