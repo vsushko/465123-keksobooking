@@ -55,7 +55,7 @@ mapPinButton.addEventListener('mousedown', function (evt) {
   /**
    * При каждом движении мыши обновляем смещение относительно первоначальной точки
    * чтобы диалог смещался на необходимую величину
-   * @param {Event} moveEvt
+   * @param {Event} moveEvt событие
    */
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
