@@ -8,10 +8,10 @@
 
   /**
  * Обработчик закрытия попапа
- * @param {Event} evt событие
+ * @param {Event} escPressEvt событие
  */
-  var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+  var onPopupEscPress = function (escPressEvt) {
+    if (escPressEvt.keyCode === ESC_KEYCODE) {
       window.showCard.closePopup(false);
     }
   };
