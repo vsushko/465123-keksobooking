@@ -6,14 +6,25 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
+  /**
+ * Обработчик закрытия попапа
+ * @param {Event} escPressEvt событие
+ */
+  var onPopupEscPress = function (escPressEvt) {
+    if (escPressEvt.keyCode === ESC_KEYCODE) {
+      window.showCard.closePopup(false);
+    }
+  };
+
   window.showCard = {
     /**
      * Показывает карточку выбранного жилья по нажатию на метку на карте
      * @param {Array} advertisements объявления
      * @param {Object} mapPinsContainer контейнер с кнопками
+     * @param {Event} evt событие
      */
-    showCard: function (advertisements, mapPinsContainer) {
-      var clickedPin = event.target;
+    showCard: function (advertisements, mapPinsContainer, evt) {
+      var clickedPin = evt.target;
       var currentAdvertisementPopup;
 
       if (clickedPin) {
@@ -26,7 +37,7 @@
           // удалим map__pin--active у он был у кнопки
           window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
 
-          var parentNode = event.target.parentNode;
+          var parentNode = evt.target.parentNode;
           // добавим класс map__pin--active к кнопке
           // обрабатываем только вариант нажатия на изображение
           if (parentNode.className !== 'map__pins') {
@@ -56,42 +67,32 @@
       if (currentAdvertisementPopup) {
         var closePopupButton = document.querySelector('.popup__close');
         closePopupButton.addEventListener('click', function () {
-          closePopup(currentAdvertisementPopup);
+          window.showCard.closePopup(currentAdvertisementPopup);
         });
 
-        currentAdvertisementPopup.addEventListener('keydown', function (evt) {
-          if (evt.keyCode === ENTER_KEYCODE) {
-            closePopup(currentAdvertisementPopup);
+        currentAdvertisementPopup.addEventListener('keydown', function (enterPressEvt) {
+          if (enterPressEvt.keyCode === ENTER_KEYCODE) {
+            window.showCard.closePopup(currentAdvertisementPopup);
           }
         });
       }
-    }
-  };
-
-  /**
-   * Обработчик закрытия попапа
-   * @param {Event} event событие
-   */
-  var onPopupEscPress = function (event) {
-    if (event.keyCode === ESC_KEYCODE) {
-      closePopup();
-    }
-  };
-
-  /**
-   * Удаляет попап из DOM
-   * @param {Object} toClosePopup попап для удаления
-   */
-  var closePopup = function (toClosePopup) {
-    if (toClosePopup) {
-      // удаляем ноду, если клик
-      toClosePopup.remove();
-      document.removeEventListener('keydown', onPopupEscPress);
-    } else {
-      // обрабатываем esc
-      var mapCard = document.querySelector('.map__card');
-      if (mapCard) {
-        mapCard.remove();
+    },
+    /**
+     * Удаляет попап из DOM
+     * @param {Object} toClosePopup попап для удаления
+     */
+    closePopup: function (toClosePopup) {
+      if (toClosePopup) {
+        // удаляем ноду, если клик
+        toClosePopup.remove();
+        document.removeEventListener('keydown', onPopupEscPress);
+      } else {
+        // обрабатываем esc
+        var mapCard = document.querySelector('.map__card');
+        if (mapCard) {
+          mapCard.remove();
+          document.removeEventListener('keydown', onPopupEscPress);
+        }
       }
     }
   };

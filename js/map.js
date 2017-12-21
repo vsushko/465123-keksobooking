@@ -2,38 +2,45 @@
 'use strict';
 
 var ENTER_KEYCODE = 13;
+var INITIAL_PINS_COUNT = 1;
+
+// изначально все поля формы недоступны
+window.form.setFieldSetInaccessibility(true);
 
 var mapPinButton = document.querySelector('.map__pin--main');
 
 mapPinButton.addEventListener('mouseup', function () {
-
   // открываем карту
   document.querySelector('.map').classList.remove('map--faded');
 
   // элемент куда будем вставлять объявления
   var mapPinsContainer = document.querySelector('.map__pins');
 
-  // сгенерируем пины на основе существующего
-  var pinButtonsFragment = window.pin.generateAdvertisementPins(window.data.advertisements);
+  var generatedPinsCount = mapPinsContainer.querySelectorAll('.map__pin').length;
 
-  // вставляем сгенерированные
-  mapPinsContainer.appendChild(pinButtonsFragment);
+  if (generatedPinsCount <= INITIAL_PINS_COUNT) {
+    // сгенерируем пины на основе существующего
+    var pinButtonsFragment = window.pin.generateAdvertisementPins(window.data.advertisements);
 
-  // делаем форму активной
-  document.querySelector('.notice__form').classList.remove('notice__form--disabled');
+    // вставляем сгенерированные
+    mapPinsContainer.appendChild(pinButtonsFragment);
 
-  // сделаем поля формы активными
-  window.form.setFieldSetInaccessibility(false);
+    // делаем форму активной
+    document.querySelector('.notice__form').classList.remove('notice__form--disabled');
 
-  mapPinsContainer.addEventListener('click', function () {
-    window.showCard.showCard(window.data.advertisements, mapPinsContainer);
-  });
+    // сделаем поля формы активными
+    window.form.setFieldSetInaccessibility(false);
 
-  mapPinsContainer.addEventListener('keydown', function (event) {
-    if (event.keyCode === ENTER_KEYCODE) {
-      window.showCard.showCard(window.data.advertisements, mapPinsContainer);
-    }
-  });
+    mapPinsContainer.addEventListener('click', function (evt) {
+      window.showCard.showCard(window.data.advertisements, mapPinsContainer, evt);
+    });
+
+    mapPinsContainer.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        window.showCard.showCard(window.data.advertisements, mapPinsContainer, evt);
+      }
+    });
+  }
 });
 
 // добавим обработку события перетаскивания
@@ -48,7 +55,7 @@ mapPinButton.addEventListener('mousedown', function (evt) {
   /**
    * При каждом движении мыши обновляем смещение относительно первоначальной точки
    * чтобы диалог смещался на необходимую величину
-   * @param {Event} moveEvt
+   * @param {Event} moveEvt событие
    */
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
@@ -70,8 +77,9 @@ mapPinButton.addEventListener('mousedown', function (evt) {
       mapPinButton.style.top = newCoordYValue + 'px';
       mapPinButton.style.left = newCoordXValue + 'px';
 
-      var addressField = document.getElementById('address');
-      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + 20, 10) + ', y: ' + parseInt(mapPinButton.style.top + 44, 10);
+      var addressField = document.querySelector('#address');
+      addressField.value = 'x: ' + parseInt(mapPinButton.style.left + window.pin.MAP_PIN_INDENT_X, 10)
+        + ', y: ' + parseInt(mapPinButton.style.top + window.pin.MAP_PIN_INDENT_Y, 10);
     }
   };
 
