@@ -71,7 +71,6 @@
    * @return {Object} результат сравнения
    */
   var checkPriceSelectorValuesForFiltering = function (currentSelectorValue1, currentObjectValue) {
-    debugger
     var filtered = false;
     if (!(currentSelectorValue1 === SELECTOR_ANY_VALUE)) {
       if (currentSelectorValue1 === 'middle' && !(currentObjectValue <= 50000 && currentObjectValue >= 10000)) {
