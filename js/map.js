@@ -31,13 +31,13 @@ mapPinButton.addEventListener('mouseup', function () {
     // сделаем поля формы активными
     window.form.setFieldSetInaccessibility(false);
 
-    mapPinsContainer.addEventListener('click', function () {
-      window.showCard.showCard(window.data.advertisements, mapPinsContainer);
+    mapPinsContainer.addEventListener('click', function (evt) {
+      window.showCard.showCard(window.data.advertisements, mapPinsContainer, evt);
     });
 
     mapPinsContainer.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ENTER_KEYCODE) {
-        window.showCard.showCard(window.data.advertisements, mapPinsContainer);
+        window.showCard.showCard(window.data.advertisements, mapPinsContainer, evt);
       }
     });
   }

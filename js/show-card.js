@@ -21,8 +21,9 @@
      * Показывает карточку выбранного жилья по нажатию на метку на карте
      * @param {Array} advertisements объявления
      * @param {Object} mapPinsContainer контейнер с кнопками
+     * @param {Event} evt событие
      */
-    showCard: function (advertisements, mapPinsContainer) {
+    showCard: function (advertisements, mapPinsContainer, evt) {
       var clickedPin = evt.target;
       var currentAdvertisementPopup;
 
