@@ -70,8 +70,8 @@
           window.showCard.closePopup(currentAdvertisementPopup);
         });
 
-        currentAdvertisementPopup.addEventListener('keydown', function (evt) {
-          if (evt.keyCode === ENTER_KEYCODE) {
+        currentAdvertisementPopup.addEventListener('keydown', function (enterPressEvt) {
+          if (enterPressEvt.keyCode === ENTER_KEYCODE) {
             window.showCard.closePopup(currentAdvertisementPopup);
           }
         });
