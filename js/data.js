@@ -19,6 +19,7 @@
    * @param {Object} data набор полученных данных
    */
   var onLoad = function (data) {
+    console.log(data);
     window.data = {
       advertisements: data
     };
