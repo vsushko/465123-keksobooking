@@ -37,8 +37,8 @@
   window.synchronizeFields(apartmentRoomsNumber, apartmentCapacity, ROOM_NUMBERS, APARTMENT_CAPACITY_VALUES, window.util.syncValues);
 
   // добавляем обработчик на отправку формы
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
 
     window.backend.save(new FormData(form), function () {
       form.reset();

@@ -8,10 +8,10 @@
 
   /**
  * Обработчик закрытия попапа
- * @param {Event} event событие
+ * @param {Event} evt событие
  */
-  var onPopupEscPress = function (event) {
-    if (event.keyCode === ESC_KEYCODE) {
+  var onPopupEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
       window.showCard.closePopup(false);
     }
   };
@@ -23,7 +23,7 @@
      * @param {Object} mapPinsContainer контейнер с кнопками
      */
     showCard: function (advertisements, mapPinsContainer) {
-      var clickedPin = event.target;
+      var clickedPin = evt.target;
       var currentAdvertisementPopup;
 
       if (clickedPin) {
@@ -36,7 +36,7 @@
           // удалим map__pin--active у он был у кнопки
           window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
 
-          var parentNode = event.target.parentNode;
+          var parentNode = evt.target.parentNode;
           // добавим класс map__pin--active к кнопке
           // обрабатываем только вариант нажатия на изображение
           if (parentNode.className !== 'map__pins') {

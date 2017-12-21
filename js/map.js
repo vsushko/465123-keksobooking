@@ -35,8 +35,8 @@ mapPinButton.addEventListener('mouseup', function () {
       window.showCard.showCard(window.data.advertisements, mapPinsContainer);
     });
 
-    mapPinsContainer.addEventListener('keydown', function (event) {
-      if (event.keyCode === ENTER_KEYCODE) {
+    mapPinsContainer.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
         window.showCard.showCard(window.data.advertisements, mapPinsContainer);
       }
     });
