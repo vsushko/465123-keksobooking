@@ -29,7 +29,7 @@
     // отфильтруем пины
     window.debounce(filterPins(usersPins));
     // закрываем popup
-    window.showCard.closePopup();
+    window.card.closePopup();
   });
 
   /**

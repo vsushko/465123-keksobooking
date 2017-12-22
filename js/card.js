@@ -3,11 +3,32 @@
 
 (function () {
 
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
   var CARD_PHOTO_SIZE = 45;
   var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
 
   // создадим DOM-элемент объявления на основе существующего
   var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
+
+  /**
+   * Обработчик закрытия попапа
+   * @param {Event} escPressEvt событие
+   */
+  var onPopupEscPress = function (escPressEvt) {
+    if (escPressEvt.keyCode === ESC_KEYCODE) {
+      window.card.closePopup(false);
+    }
+  };
+
+  /**
+   * Устанавливает элементу указанное значение
+   * @param {Object} element
+   * @param {Object} elementValue
+   */
+  var setElementTextContent = function (element, elementValue) {
+    advertisementPopup.querySelector(element).textContent = elementValue;
+  };
 
   window.card = {
     houseTypeMap: HOUSE_TYPES_MAP,
@@ -58,15 +79,84 @@
       }
 
       return advertisementPopup;
-    }
-  };
+    },
+    /**
+     * Показывает карточку выбранного жилья по нажатию на метку на карте
+     * @param {Array} advertisements объявления
+     * @param {Object} mapPinsContainer контейнер с кнопками
+     * @param {Event} evt событие
+     */
+    showCard: function (advertisements, mapPinsContainer, evt) {
+      var clickedPin = evt.target;
+      var currentAdvertisementPopup;
 
-  /**
-   * Устанавливает элементу указанное значение
-   * @param {Object} element
-   * @param {Object} elementValue
-   */
-  var setElementTextContent = function (element, elementValue) {
-    advertisementPopup.querySelector(element).textContent = elementValue;
+      if (clickedPin) {
+        // либо это клик мышкой по пину, либо нажали ENTER
+        var pinImg = clickedPin.firstElementChild ? clickedPin.firstElementChild : clickedPin;
+
+        if (pinImg && pinImg.nodeName === 'IMG') {
+          var advertisement;
+
+          // удалим map__pin--active у он был у кнопки
+          window.util.removeContainerElementsClassesByName(mapPinsContainer.children, 'map__pin--active');
+
+          var parentNode = evt.target.parentNode;
+          // добавим класс map__pin--active к кнопке
+          // обрабатываем только вариант нажатия на изображение
+          if (parentNode.className !== 'map__pins') {
+            parentNode.classList.add('map__pin--active');
+          }
+
+          // найдем объявление
+          for (var i = 0; i < advertisements.length; i++) {
+            if (pinImg.alt.indexOf(advertisements[i].offer.title) !== -1) {
+              advertisement = advertisements[i];
+            }
+          }
+
+          if (advertisement) {
+            // создадим попап на основе переданного объявления
+            currentAdvertisementPopup = window.card.createAdvertisementPopup(advertisement);
+            // достанем блок .map__filters-container перед которым будем вставлять объявление
+            var mapFiltersContainer = document.querySelector('.map__filters-container');
+            // вставим объявление
+            mapFiltersContainer.parentNode.insertBefore(currentAdvertisementPopup, mapFiltersContainer);
+          }
+        }
+      }
+
+      document.addEventListener('keydown', onPopupEscPress);
+
+      if (currentAdvertisementPopup) {
+        var closePopupButton = document.querySelector('.popup__close');
+        closePopupButton.addEventListener('click', function () {
+          window.card.closePopup(currentAdvertisementPopup);
+        });
+
+        currentAdvertisementPopup.addEventListener('keydown', function (enterPressEvt) {
+          if (enterPressEvt.keyCode === ENTER_KEYCODE) {
+            window.card.closePopup(currentAdvertisementPopup);
+          }
+        });
+      }
+    },
+    /**
+     * Удаляет попап из DOM
+     * @param {Object} toClosePopup попап для удаления
+     */
+    closePopup: function (toClosePopup) {
+      if (toClosePopup) {
+        // удаляем ноду, если клик
+        toClosePopup.remove();
+        document.removeEventListener('keydown', onPopupEscPress);
+      } else {
+        // обрабатываем esc
+        var mapCard = document.querySelector('.map__card');
+        if (mapCard) {
+          mapCard.remove();
+          document.removeEventListener('keydown', onPopupEscPress);
+        }
+      }
+    }
   };
 })();

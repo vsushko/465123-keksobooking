@@ -34,12 +34,12 @@
       window.form.setFieldSetInaccessibility(false);
 
       mapPinsContainer.addEventListener('click', function (evt) {
-        window.showCard.showCard(window.data.advertisements, mapPinsContainer, evt);
+        window.card.showCard(window.data.advertisements, mapPinsContainer, evt);
       });
 
       mapPinsContainer.addEventListener('keydown', function (evt) {
         if (evt.keyCode === ENTER_KEYCODE) {
-          window.showCard.showCard(window.data.advertisements, mapPinsContainer, evt);
+          window.card.showCard(window.data.advertisements, mapPinsContainer, evt);
         }
       });
     }
