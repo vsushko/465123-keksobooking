@@ -51,9 +51,9 @@
      * @param {Boolean} deactivated флаг неактивности
      */
     setFieldSetInaccessibility: function (deactivated) {
-      for (var i = 0; i < fieldSet.length; i++) {
-        fieldSet[i].disabled = deactivated;
-      }
+      fieldSet.forEach(function (fieldElement) {
+        fieldElement.disabled = deactivated;
+      });
     }
   };
 })();
