@@ -6,6 +6,11 @@
   var ENTER_KEYCODE = 13;
   var INITIAL_PINS_COUNT = 1;
 
+  PIN_COORD_X_MIN_VALUE = 40;
+  PIN_COORD_X_MAX_VALUE = 1160;
+  PIN_COORD_Y_MIN_VALUE = 100;
+  PIN_COORD_Y_MAX_VALUE = 500;
+
   // изначально все поля формы недоступны
   window.form.setFieldSetInaccessibility(true);
 
@@ -75,7 +80,8 @@
       var newCoordYValue = mapPinButton.offsetTop - shift.y;
       var newCoordXValue = mapPinButton.offsetLeft - shift.x;
 
-      if (newCoordXValue >= 40 && newCoordXValue <= 1160 && newCoordYValue >= 100 && newCoordYValue <= 500) {
+      if (newCoordXValue >= PIN_COORD_X_MIN_VALUE && newCoordXValue <= PIN_COORD_X_MAX_VALUE
+            && newCoordYValue >= PIN_COORD_Y_MIN_VALUE && newCoordYValue <= PIN_COORD_Y_MAX_VALUE) {
         mapPinButton.style.top = newCoordYValue + 'px';
         mapPinButton.style.left = newCoordXValue + 'px';
 
