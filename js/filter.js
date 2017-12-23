@@ -98,6 +98,7 @@
 
       if (featureCheckbox.checked && !(currentObjectValue.indexOf(featureCheckbox.value) > -1)) {
         filtered = true;
+        break;
       }
     }
     return filtered;

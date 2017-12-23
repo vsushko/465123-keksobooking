@@ -6,10 +6,10 @@
   var ENTER_KEYCODE = 13;
   var INITIAL_PINS_COUNT = 1;
 
-  PIN_COORD_X_MIN_VALUE = 40;
-  PIN_COORD_X_MAX_VALUE = 1160;
-  PIN_COORD_Y_MIN_VALUE = 100;
-  PIN_COORD_Y_MAX_VALUE = 500;
+  var PIN_COORD_X_MIN_VALUE = 40;
+  var PIN_COORD_X_MAX_VALUE = 1160;
+  var PIN_COORD_Y_MIN_VALUE = 100;
+  var PIN_COORD_Y_MAX_VALUE = 500;
 
   // изначально все поля формы недоступны
   window.form.setFieldSetInaccessibility(true);
