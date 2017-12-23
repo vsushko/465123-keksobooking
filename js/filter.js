@@ -6,6 +6,8 @@
   var MAX_PINS_AMOUNT_TO_SHOW = 5;
   var SELECTOR_ANY_VALUE = 'any';
   var HIDDEN_CLASS_NAME = 'hidden';
+  var PRICE_MIM_VALUE = 10000;
+  var PRICE_MAX_VALUE = 50000;
 
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
@@ -73,11 +75,11 @@
   var checkPriceSelectorValuesForFiltering = function (currentSelectorValue1, currentObjectValue) {
     var filtered = false;
     if (!(currentSelectorValue1 === SELECTOR_ANY_VALUE)) {
-      if (currentSelectorValue1 === 'middle' && !(currentObjectValue <= 50000 && currentObjectValue >= 10000)) {
+      if (currentSelectorValue1 === 'middle' && !(currentObjectValue <= PRICE_MAX_VALUE && currentObjectValue >= PRICE_MIM_VALUE)) {
         filtered = true;
-      } else if (currentSelectorValue1 === 'low' && !(currentObjectValue < 10000)) {
+      } else if (currentSelectorValue1 === 'low' && !(currentObjectValue < PRICE_MIM_VALUE)) {
         filtered = true;
-      } else if (currentSelectorValue1 === 'high' && !(currentObjectValue > 50000)) {
+      } else if (currentSelectorValue1 === 'high' && !(currentObjectValue > PRICE_MAX_VALUE)) {
         filtered = true;
       }
     }
