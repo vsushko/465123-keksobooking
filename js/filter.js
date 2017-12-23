@@ -93,8 +93,8 @@
   var checkFeatureCheckBoxesForFiltering = function (checkboxes, currentObjectValue) {
     var filtered = false;
 
-    for (var i = 0; i < featuresCheckboxes.length; i++) {
-      var featureCheckbox = featuresCheckboxes[i];
+    for (var i = 0; i < checkboxes.length; i++) {
+      var featureCheckbox = checkboxes[i];
 
       if (featureCheckbox.checked && !(currentObjectValue.indexOf(featureCheckbox.value) > -1)) {
         filtered = true;
