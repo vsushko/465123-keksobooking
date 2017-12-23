@@ -163,15 +163,14 @@
       if (toClosePopup) {
         // удаляем ноду, если клик
         toClosePopup.remove();
-        document.removeEventListener('keydown', onPopupEscPress);
       } else {
         // обрабатываем esc
         var mapCard = document.querySelector('.map__card');
         if (mapCard) {
           mapCard.remove();
-          document.removeEventListener('keydown', onPopupEscPress);
         }
       }
+      document.removeEventListener('keydown', onPopupEscPress);
     }
   };
 })();
