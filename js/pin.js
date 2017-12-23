@@ -25,7 +25,7 @@
     buttonImgElement.setAttribute('src', advertisement.author.avatar);
     buttonImgElement.setAttribute('alt', advertisement.offer.title);
 
-    // добавим данные о объявлени в ноду пина
+    // добавим данные о объявлении в ноду пина
     buttonElement.data = advertisement;
     // установим кликабельный курсор
     buttonElement.style.cursor = 'pointer';
