@@ -53,11 +53,11 @@
         window.util.removeFirstChilds(fearuresElementsList);
 
         // создаем те которые есть в объявлении
-        for (var i = 0; i < advertisement.offer.features.length; i++) {
+        advertisement.offer.features.forEach(function(feature) {
           var newFeatureElement = document.createElement('li');
-          newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[i]);
+          newFeatureElement.setAttribute('class', 'feature feature--' + feature);
           fearuresElementsList.appendChild(newFeatureElement);
-        }
+        });
 
         setElementTextContent('.popup__description', advertisement.offer.description);
         advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author.avatar);
