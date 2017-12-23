@@ -41,13 +41,7 @@
    * @return {Object} результат сравнения
    */
   var checkSelectorValueForFiltering = function (currentSelectorValue, currentObjectValue) {
-    var filtered = false;
-
-    if (parseInt(currentSelectorValue, 10) !== currentObjectValue && !(currentSelectorValue === SELECTOR_ANY_VALUE)) {
-      filtered = true;
-    }
-
-    return filtered;
+    return (parseInt(currentSelectorValue, 10) !== currentObjectValue && !(currentSelectorValue === SELECTOR_ANY_VALUE));
   };
 
   /**
@@ -57,13 +51,7 @@
    * @return {Object} результат сравнения
    */
   var checkSelectorTextForFiltering = function (currentSelector, currentObjectValue) {
-    var filtered = false;
-
-    if (currentSelector.text !== currentObjectValue && !(currentSelector.value === SELECTOR_ANY_VALUE)) {
-      filtered = true;
-    }
-
-    return filtered;
+    return (currentSelector.text !== currentObjectValue && !(currentSelector.value === SELECTOR_ANY_VALUE));
   };
 
   /**
