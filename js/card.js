@@ -7,7 +7,7 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   var CARD_PHOTO_SIZE = 45;
-  var HOUSE_TYPES_MAP = { 'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало' };
+  var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
 
   // создадим DOM-элемент объявления на основе существующего
   var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
@@ -137,7 +137,7 @@
       var currentAdvertisementPopup;
 
       if (clickedPin) {
-        currentAdvertisementPopup = getCurrentAdvertisementPopup(advertisements, mapPinsContainer, clickedPin)
+        currentAdvertisementPopup = getCurrentAdvertisementPopup(advertisements, mapPinsContainer, clickedPin);
       }
 
       document.addEventListener('keydown', onPopupEscPress);
