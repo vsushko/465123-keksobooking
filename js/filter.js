@@ -128,7 +128,7 @@
 
       filtered = isHouseTypePassed || isHousePricePassed || isHouseRoomsPassed || isHouseGuestsPassed || isCheckBoxPassed;
 
-      if (filtered || visiblePinsCount >= MAX_PINS_AMOUNT_TO_SHOW - 1) {
+      if (filtered || visiblePinsCount >= MAX_PINS_AMOUNT_TO_SHOW) {
         mapPin.classList.add(HIDDEN_CLASS_NAME);
       } else if (visiblePinsCount < MAX_PINS_AMOUNT_TO_SHOW) {
         visiblePinsCount++;

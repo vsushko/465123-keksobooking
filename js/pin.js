@@ -47,7 +47,7 @@
       for (var i = 0; i < advertisements.length; i++) {
         var generatedAdvertisement = renderAdvertisementPin(advertisements[i]);
         // показываем не больше доступного числа пинов
-        if (i >= MAX_PINS_AMOUNT_TO_SHOW - 1) {
+        if (i >= MAX_PINS_AMOUNT_TO_SHOW) {
           generatedAdvertisement.classList.add('hidden');
         }
         buttonsFragment.appendChild(generatedAdvertisement);
