@@ -93,7 +93,7 @@
   var checkFeatureCheckBoxesForFiltering = function (checkboxes, currentObjectValue) {
     var filtered = false;
 
-    for (var i = 0; i < checkboxes.length; i++) {
+    for (var i = 0; i < checkboxes.length && !filtered; i++) {
       var featureCheckbox = checkboxes[i];
 
       if (featureCheckbox.checked && !(currentObjectValue.indexOf(featureCheckbox.value) > -1)) {
@@ -112,7 +112,7 @@
     // кол-во видимых пинов
     var visiblePinsCount = 0;
 
-    toFilteringPins.filter(function (mapPin) {
+    toFilteringPins.forEach(function (mapPin) {
       var filtered = false;
 
       // селектор числа комнат
