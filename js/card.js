@@ -3,6 +3,7 @@
 
 (function () {
 
+  var IMG_TAG_NAME = 'IMG';
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   var CARD_PHOTO_SIZE = 45;
@@ -94,7 +95,7 @@
         // либо это клик мышкой по пину, либо нажали ENTER
         var pinImg = clickedPin.firstElementChild ? clickedPin.firstElementChild : clickedPin;
 
-        if (pinImg && pinImg.nodeName === 'IMG') {
+        if (pinImg && pinImg.nodeName === IMG_TAG_NAME) {
           var advertisement;
 
           // удалим map__pin--active у он был у кнопки
