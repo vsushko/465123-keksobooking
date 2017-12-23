@@ -14,7 +14,7 @@
   var fieldSet = form.querySelectorAll('fieldset');
 
   // зададим начальные координаты пина пользователю
-  var pinButton = document.querySelector('.map__pin');
+  var pinButton = window.pin.getMapPinButton();
   var addressField = document.querySelector('#address');
   addressField.value = 'x: ' + pinButton.offsetLeft + ', y: ' + pinButton.offsetTop;
 

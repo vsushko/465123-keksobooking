@@ -21,7 +21,7 @@
     document.querySelector('.map').classList.remove('map--faded');
 
     // элемент куда будем вставлять объявления
-    var mapPinsContainer = document.querySelector('.map__pins');
+    var mapPinsContainer = window.pin.getMapPinsButton();
 
     var generatedPinsCount = mapPinsContainer.querySelectorAll('.map__pin').length;
 

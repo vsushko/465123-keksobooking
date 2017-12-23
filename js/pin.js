@@ -7,16 +7,13 @@
   var MAP_PIN_INDENT_X = 20;
   var MAP_PIN_INDENT_Y = 44;
 
-  // найдем DOM-элемент пина
-  var pinButton = document.querySelector('.map__pin');
-
   /**
    * Возвращает склонированную ноду кнопки с меткой
    * @param {Object} advertisement объявление
    * @return {Object} нода
    */
   var renderAdvertisementPin = function (advertisement) {
-    var buttonElement = pinButton.cloneNode(true);
+    var buttonElement = window.pin.getMapPinButton().cloneNode(true);
 
     buttonElement.setAttribute('style', 'left: ' + (advertisement.location.x + window.pin.pinIndentX) + 'px; top: '
       + (advertisement.location.y + window.pin.pinIndentY) + 'px;');
@@ -36,6 +33,20 @@
   window.pin = {
     pinIndentX: MAP_PIN_INDENT_X,
     pinIndentY: MAP_PIN_INDENT_Y,
+    /**
+     * Возвращает элемент с пинами
+     * @return {Object} mapPins
+     */
+    getMapPinsButton: function () {
+      return document.querySelector('.map__pins');
+    },
+    /**
+     * Возвращает элемент пина
+     * @return {Object} mapPin
+     */
+    getMapPinButton: function () {
+      return document.querySelector('.map__pin');
+    },
     /**
      * Генерирует пины по переданному списку объявлений
      * @param {Array} advertisements объявления

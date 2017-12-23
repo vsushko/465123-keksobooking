@@ -12,7 +12,7 @@
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
   // пины
-  var mapPins = document.querySelector('.map__pins');
+  var mapPins = window.pin.getMapPinsButton();
   // элементы для фильтрации
   var housingTypeSelect = document.querySelector('#housing-type');
   var housingPriceSelect = document.querySelector('#housing-price');
