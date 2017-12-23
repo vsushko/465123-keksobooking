@@ -14,7 +14,7 @@
   var fieldSet = form.querySelectorAll('fieldset');
 
   // зададим начальные координаты пина пользователю
-  var pinButton = document.querySelector('.map__pin');
+  var pinButton = window.pin.getMapPinButton();
   var addressField = document.querySelector('#address');
   addressField.value = 'x: ' + pinButton.offsetLeft + ', y: ' + pinButton.offsetTop;
 
@@ -51,9 +51,9 @@
      * @param {Boolean} deactivated флаг неактивности
      */
     setFieldSetInaccessibility: function (deactivated) {
-      for (var i = 0; i < fieldSet.length; i++) {
-        fieldSet[i].disabled = deactivated;
-      }
+      fieldSet.forEach(function (fieldElement) {
+        fieldElement.disabled = deactivated;
+      });
     }
   };
 })();

@@ -3,11 +3,78 @@
 
 (function () {
 
+  var IMG_TAG_NAME = 'IMG';
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
   var CARD_PHOTO_SIZE = 45;
   var HOUSE_TYPES_MAP = {'flat': 'Квартира', 'house': 'Дом', 'bungalo': 'Бунгало'};
 
   // создадим DOM-элемент объявления на основе существующего
   var advertisementPopup = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
+
+  /**
+   * Обработчик закрытия попапа
+   * @param {Event} escPressEvt событие
+   */
+  var onPopupEscPress = function (escPressEvt) {
+    if (escPressEvt.keyCode === ESC_KEYCODE) {
+      window.card.closePopup(false);
+    }
+  };
+
+  /**
+   * Устанавливает элементу указанное значение
+   * @param {Object} element
+   * @param {Object} elementValue
+   */
+  var setElementTextContent = function (element, elementValue) {
+    advertisementPopup.querySelector(element).textContent = elementValue;
+  };
+
+  /**
+   * Возвращает текущее объявление
+   * @param {Object} loadedAdvertisements объявления загруженные с сервера
+   * @param {Object} advertisementPinContainer пин
+   * @param {Object} evtTarget событие на котором был клик/enter
+   * @return {Object} currentAdvertisementPopup
+   */
+  var getCurrentAdvertisementPopup = function (loadedAdvertisements, advertisementPinContainer, evtTarget) {
+    var currentAdvertisementPopup;
+
+    // либо это клик мышкой по пину, либо нажали ENTER
+    var pinImg = evtTarget.firstElementChild ? evtTarget.firstElementChild : evtTarget;
+
+    if (pinImg && pinImg.nodeName === IMG_TAG_NAME) {
+      var advertisement;
+
+      // удалим map__pin--active у он был у кнопки
+      window.util.removeContainerElementsClassesByName(advertisementPinContainer.children, 'map__pin--active');
+
+      var parentNode = evtTarget.parentNode;
+      // добавим класс map__pin--active к кнопке
+      // обрабатываем только вариант нажатия на изображение
+      if (parentNode.className !== 'map__pins') {
+        parentNode.classList.add('map__pin--active');
+      }
+
+      // найдем объявление
+      for (var i = 0; i < loadedAdvertisements.length; i++) {
+        if (pinImg.alt.indexOf(loadedAdvertisements[i].offer.title) !== -1) {
+          advertisement = loadedAdvertisements[i];
+        }
+      }
+
+      if (advertisement) {
+        // создадим попап на основе переданного объявления
+        currentAdvertisementPopup = window.card.createAdvertisementPopup(advertisement);
+        // достанем блок .map__filters-container перед которым будем вставлять объявление
+        var mapFiltersContainer = document.querySelector('.map__filters-container');
+        // вставим объявление
+        mapFiltersContainer.parentNode.insertBefore(currentAdvertisementPopup, mapFiltersContainer);
+      }
+    }
+    return currentAdvertisementPopup;
+  };
 
   window.card = {
     houseTypeMap: HOUSE_TYPES_MAP,
@@ -31,11 +98,11 @@
         window.util.removeFirstChilds(fearuresElementsList);
 
         // создаем те которые есть в объявлении
-        for (var i = 0; i < advertisement.offer.features.length; i++) {
+        advertisement.offer.features.forEach(function (feature) {
           var newFeatureElement = document.createElement('li');
-          newFeatureElement.setAttribute('class', 'feature feature--' + advertisement.offer.features[i]);
+          newFeatureElement.setAttribute('class', 'feature feature--' + feature);
           fearuresElementsList.appendChild(newFeatureElement);
-        }
+        });
 
         setElementTextContent('.popup__description', advertisement.offer.description);
         advertisementPopup.querySelector('.popup__avatar').setAttribute('src', advertisement.author.avatar);
@@ -58,15 +125,52 @@
       }
 
       return advertisementPopup;
-    }
-  };
+    },
+    /**
+     * Показывает карточку выбранного жилья по нажатию на метку на карте
+     * @param {Array} advertisements объявления
+     * @param {Object} mapPinsContainer контейнер с кнопками
+     * @param {Event} evt событие
+     */
+    showCard: function (advertisements, mapPinsContainer, evt) {
+      var clickedPin = evt.target;
+      var currentAdvertisementPopup;
 
-  /**
-   * Устанавливает элементу указанное значение
-   * @param {Object} element
-   * @param {Object} elementValue
-   */
-  var setElementTextContent = function (element, elementValue) {
-    advertisementPopup.querySelector(element).textContent = elementValue;
+      if (clickedPin) {
+        currentAdvertisementPopup = getCurrentAdvertisementPopup(advertisements, mapPinsContainer, clickedPin);
+      }
+
+      document.addEventListener('keydown', onPopupEscPress);
+
+      if (currentAdvertisementPopup) {
+        var closePopupButton = document.querySelector('.popup__close');
+        closePopupButton.addEventListener('click', function () {
+          window.card.closePopup(currentAdvertisementPopup);
+        });
+
+        currentAdvertisementPopup.addEventListener('keydown', function (enterPressEvt) {
+          if (enterPressEvt.keyCode === ENTER_KEYCODE) {
+            window.card.closePopup(currentAdvertisementPopup);
+          }
+        });
+      }
+    },
+    /**
+     * Удаляет попап из DOM
+     * @param {Object} toClosePopup попап для удаления
+     */
+    closePopup: function (toClosePopup) {
+      if (toClosePopup) {
+        // удаляем ноду, если клик
+        toClosePopup.remove();
+      } else {
+        // обрабатываем esc
+        var mapCard = document.querySelector('.map__card');
+        if (mapCard) {
+          mapCard.remove();
+        }
+      }
+      document.removeEventListener('keydown', onPopupEscPress);
+    }
   };
 })();

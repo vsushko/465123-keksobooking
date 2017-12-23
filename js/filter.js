@@ -6,11 +6,13 @@
   var MAX_PINS_AMOUNT_TO_SHOW = 5;
   var SELECTOR_ANY_VALUE = 'any';
   var HIDDEN_CLASS_NAME = 'hidden';
+  var PRICE_MIM_VALUE = 10000;
+  var PRICE_MAX_VALUE = 50000;
 
   // элемент с фильтрами
   var mapFilters = document.querySelector('.map__filters');
   // пины
-  var mapPins = document.querySelector('.map__pins');
+  var mapPins = window.pin.getMapPinsButton();
   // элементы для фильтрации
   var housingTypeSelect = document.querySelector('#housing-type');
   var housingPriceSelect = document.querySelector('#housing-price');
@@ -29,7 +31,7 @@
     // отфильтруем пины
     window.debounce(filterPins(usersPins));
     // закрываем popup
-    window.showCard.closePopup();
+    window.card.closePopup();
   });
 
   /**
@@ -39,13 +41,7 @@
    * @return {Object} результат сравнения
    */
   var checkSelectorValueForFiltering = function (currentSelectorValue, currentObjectValue) {
-    var filtered = false;
-
-    if (parseInt(currentSelectorValue, 10) !== currentObjectValue && !(currentSelectorValue === SELECTOR_ANY_VALUE)) {
-      filtered = true;
-    }
-
-    return filtered;
+    return (parseInt(currentSelectorValue, 10) !== currentObjectValue && !(currentSelectorValue === SELECTOR_ANY_VALUE));
   };
 
   /**
@@ -55,13 +51,7 @@
    * @return {Object} результат сравнения
    */
   var checkSelectorTextForFiltering = function (currentSelector, currentObjectValue) {
-    var filtered = false;
-
-    if (currentSelector.text !== currentObjectValue && !(currentSelector.value === SELECTOR_ANY_VALUE)) {
-      filtered = true;
-    }
-
-    return filtered;
+    return (currentSelector.text !== currentObjectValue && !(currentSelector.value === SELECTOR_ANY_VALUE));
   };
 
   /**
@@ -73,11 +63,11 @@
   var checkPriceSelectorValuesForFiltering = function (currentSelectorValue1, currentObjectValue) {
     var filtered = false;
     if (!(currentSelectorValue1 === SELECTOR_ANY_VALUE)) {
-      if (currentSelectorValue1 === 'middle' && !(currentObjectValue <= 50000 && currentObjectValue >= 10000)) {
+      if (currentSelectorValue1 === 'middle' && !(currentObjectValue <= PRICE_MAX_VALUE && currentObjectValue >= PRICE_MIM_VALUE)) {
         filtered = true;
-      } else if (currentSelectorValue1 === 'low' && !(currentObjectValue < 10000)) {
+      } else if (currentSelectorValue1 === 'low' && !(currentObjectValue < PRICE_MIM_VALUE)) {
         filtered = true;
-      } else if (currentSelectorValue1 === 'high' && !(currentObjectValue > 50000)) {
+      } else if (currentSelectorValue1 === 'high' && !(currentObjectValue > PRICE_MAX_VALUE)) {
         filtered = true;
       }
     }
@@ -93,11 +83,12 @@
   var checkFeatureCheckBoxesForFiltering = function (checkboxes, currentObjectValue) {
     var filtered = false;
 
-    for (var i = 0; i < featuresCheckboxes.length; i++) {
-      var featureCheckbox = featuresCheckboxes[i];
+    for (var i = 0; i < checkboxes.length && !filtered; i++) {
+      var featureCheckbox = checkboxes[i];
 
       if (featureCheckbox.checked && !(currentObjectValue.indexOf(featureCheckbox.value) > -1)) {
         filtered = true;
+        break;
       }
     }
     return filtered;
@@ -111,7 +102,7 @@
     // кол-во видимых пинов
     var visiblePinsCount = 0;
 
-    toFilteringPins.filter(function (mapPin) {
+    toFilteringPins.forEach(function (mapPin) {
       var filtered = false;
 
       // селектор числа комнат
@@ -127,7 +118,7 @@
 
       filtered = isHouseTypePassed || isHousePricePassed || isHouseRoomsPassed || isHouseGuestsPassed || isCheckBoxPassed;
 
-      if (filtered || visiblePinsCount >= MAX_PINS_AMOUNT_TO_SHOW - 1) {
+      if (filtered || visiblePinsCount >= MAX_PINS_AMOUNT_TO_SHOW) {
         mapPin.classList.add(HIDDEN_CLASS_NAME);
       } else if (visiblePinsCount < MAX_PINS_AMOUNT_TO_SHOW) {
         visiblePinsCount++;
